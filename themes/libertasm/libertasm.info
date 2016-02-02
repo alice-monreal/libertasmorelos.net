@@ -1,0 +1,56 @@
+; $Id: bartik.info,v 1.5 2010/11/07 00:27:20 dries Exp $
+
+name = LibertasM
+description = A flexible, recolorable theme with many regions.
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/layout.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/colors.css
+stylesheets[print][] = css/print.css
+stylesheets[all][] = libertasm/stylesheets/fonts.css
+stylesheets[all][] = libertasm/stylesheets/main.css
+stylesheets[all][] = libertasm/stylesheets/article.css
+stylesheets[all][] = plugins/slick-1.5.9/slick/slick.css
+stylesheets[all][] = plugins/slick-1.5.9/slick/slick-theme.css
+stylesheets[all][] = plugins/fancybox/source/jquery.fancybox.css
+stylesheets[all][] = plugins/fancybox/source/helpers/jquery.fancybox-thumbs.css
+stylesheets[all][] = plugins/fancybox/source/helpers/jquery.fancybox-buttons.css
+
+scripts[] = plugins/slick-1.5.9/slick/slick.min.js
+scripts[] = js/main.js
+scripts[] = plugins/fancybox/source/jquery.fancybox.pack.js
+scripts[] = plugins/fancybox/source/helpers/jquery.fancybox-thumbs.js
+scripts[] = plugins/fancybox/source/helpers/jquery.fancybox-buttons.js
+
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
+
+settings[shortcut_module_link] = 0
+
+
+; Information added by drupal.org packaging script on 2011-01-05
+version = "7.0"
+project = "drupal"
+datestamp = "1294208756"
+

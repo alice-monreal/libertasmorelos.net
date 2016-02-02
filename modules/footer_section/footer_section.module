@@ -1,0 +1,110 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function footer_section_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Footer Section Module'),
+  );
+
+  return $blocks;
+}
+
+function footer_section_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+    Global $base_url;
+      
+    $section = "
+    <div class='footer_wrapper'>
+      <div class='footer_container'>
+        <div class='footer_content'>
+          <div class='footer_row'>
+            <p class='footer_title'> Contacte con nosotros </p>
+            <div class='footer_social_networks'>
+              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/FACEBOOK_F.png' />
+              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/TWITTER_F.png' />
+              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/YOUTUBE_F.png' />
+            </div>
+          </div>
+          <div class='footer_row links'>
+            <div class='footer_column'>
+              <p class='footer_column_title'> Mapa del sitio </p>
+              <ul class='footer_column_links'>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+              </ul>
+            </div>
+            <div class='footer_column'>
+            <p class='footer_column_title'> Publicidad y tarifas </p>
+              <ul class='footer_column_links'>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+              </ul>
+            </div>
+            <div class='footer_column'>
+            <p class='footer_column_title'> Contacto </p>
+              <ul class='footer_column_links'>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+              </ul>        
+            </div>
+            <div class='footer_column'>
+            <p class='footer_column_title'> Otros links </p>
+              <ul class='footer_column_links'>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+                <li class='footer_column_link'> Esto es un link </li>
+              </ul>
+            </div>            
+          </div>
+          <div class='footer_row data'>
+            <div class='data_container'>
+              <div class='footer_column email'>
+                <img class='footer_email' src='".$base_url."/themes/libertasm/images/EMAIL-FOOTER.png' />
+                <p class='footer_column_email'> Los links </p>                
+              </div>
+              <div class='footer_column phone'>
+                <img class='footer_phone' src='".$base_url."/themes/libertasm/images/TELÉFONO-FOOTER.png' />
+                <p class='footer_column_phone'> Los links </p>
+              </div>
+            </div>
+          </div>
+          <div class='footer_row rights'>
+            <div class='rights_container'>
+              <a class='footer_column_link'> T&eacute;rminos Legales </a>
+              <p class='footer_column_separator'> | </p>
+              <a class='footer_column_link'> Aviso de privacidad </a>
+              <p class='footer_column_title'> Derechos Reservados 2016 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    ";  
+
+    $block['subject'] = t(''); //This is opiniones Section Block
+    $block['content'] = $section;
+    
+    break;
+  }
+  return $block;
+}

@@ -1,0 +1,116 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function poderes_section_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Poderes Section Module'),
+  );
+
+  return $blocks;
+}
+
+function poderes_section_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+    Global $base_url;
+
+    $poderes = array();
+    $poderesTitles = array(0 => "ejecutivo", 1 => "legislativo", 2 => "judicial");
+    
+    $item = 18;
+    for($i = 0; $i < 3; $i++){
+      $item++;
+      $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A LEFT JOIN {field_data_field_type} B ON A.nid = B.entity_id 
+        WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
+      $poder = db_query($query, array(':type' => 'articulo'))->fetchAll();
+      // print_r($poder);
+
+      if(!empty($poder)){
+        $a_id = $poder[0]->nid;
+
+        // Execute queries to get slide info: image, title (description).
+        if (is_numeric($a_id)){
+
+          // Get: Image.
+          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+
+          $i_fid = $image->field_image_profile_fid;
+          if (is_numeric($i_fid)){
+            $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+            $image_file = $image_profile_file->filename;
+          }
+          else{
+            $image_file = "gente.png"; //default image 
+          }
+
+          // Get: Title (description).
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
+
+          $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+          $title = $title_field->field_title_value;
+        }
+        else{
+          $image_file = "gente.png"; //default image 
+          $title = "No title"; //default title
+        }        
+      }
+      else{
+        $image_file = "gente.png";
+        $title = "No title";
+      }
+
+      $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
+      $poder[0]->image_name = $image_file;
+      $poder[0]->image_url  = $image_url;
+
+      $poder[0]->description = $title; 
+
+      $poder[0]->title = $poderesTitles[$i];
+
+      array_push($poderes, $poder);
+    }
+    // print_r('poderes -> ');
+    // print_r($poderes);
+
+    // Get current path
+    $path = current_path();
+    if($path == "node/6"){
+
+      $section = "
+      <div class='poderes_section'>
+        <div class='poderes_title'> 
+          <p> Poderes </p>
+        </div>
+        <div class='poderes_container'>";
+
+      foreach ($poderes as $poder) {
+        // Link: Redirect to HOME if the article validation is empty.
+        $section .= "
+          <a href='http://libertasmorelos.lo/node/".$poder[0]->nid."'>
+          <div class='poderes_content ".$poder[0]->title."'> 
+            <p class='poderes_content_title'> ".$poder[0]->title." </p>
+            <div class='poderes_content_image' style='background-image: url(".$poder[0]->image_url.");'> </div>
+            <p class='poderes_content_description'> ".$poder[0]->description." </p>                
+          </div>
+          </a>";
+      }
+
+      $section .= "
+        </div>
+      </div>";
+
+      $block['subject'] = t(''); //This is Poderes Section Block
+      $block['content'] = $section;
+    }
+      break;
+  }
+  return $block;
+}

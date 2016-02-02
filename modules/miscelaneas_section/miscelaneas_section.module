@@ -1,0 +1,123 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function miscelaneas_section_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Miscelaneas Section Module'),
+  );
+
+  return $blocks;
+}
+
+function miscelaneas_section_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+    Global $base_url;
+
+    $miscelaneas = array();
+    $miscelaneasTitles = array(0 => "ejecutivo", 1 => "legislativo", 2 => "judicial");
+    // print_r("miscelaneasTitles: ");
+    // print_r($miscelaneasTitles);
+    for($i = 0; $i < 2; $i++){
+      $item = $i+1;
+      $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
+      $miscelanea = db_query($query, array(':type' => 'articulo'))->fetchAll();
+
+      if(!empty($miscelanea)){
+        $a_id = $miscelanea[0]->nid;
+
+        // Execute queries to get slide info: image, title (description).
+        if (is_numeric($a_id)){
+
+          // Get: Image.
+          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+
+          $i_fid = $image->field_image_profile_fid;
+          if (is_numeric($i_fid)){
+            $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+            $image_file = $image_profile_file->filename;
+          }
+          else{
+            $image_file = "gente.png"; //default image 
+          }
+
+          // Get: Title (description).
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
+
+          $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+          $title = $title_field->field_title_value;
+        }
+        else{
+          $image_file = "gente.png"; //default image 
+          $title = "No title"; //default title
+        }        
+      }
+      else{
+        $image_file = "gente.png";
+        $title = "No title";
+      }
+
+      $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
+      $miscelanea[0]->image_name = $image_file;
+      $miscelanea[0]->image_url  = $image_url;
+
+      $miscelanea[0]->description = $title; 
+
+      $miscelanea[0]->title = $miscelaneasTitles[$i];
+
+      array_push($miscelaneas, $miscelanea);
+    }
+
+    // print_r('miscelaneas -> ');
+    // print_r($miscelaneas);
+
+
+    // Get current path
+    $path = current_path();
+    if($path == "node/6"){
+
+      $section = "
+      <div class='miscelaneas_section'>
+        <div class='miscelaneas_title'> 
+          <p> Miscelanea </p>
+        </div>
+        <div class='miscelaneas_container'>";
+
+      foreach ($miscelaneas as $miscelanea) {
+        // print_r("miscelanea");
+        // print_r($miscelanea);
+        // Link: Redirect to HOME if the article validation is empty.
+        $section .= "
+          <a href='http://libertasmorelos.lo/node/".$miscelanea[0]->nid."'>
+            <div class='miscelaneas_content ".$miscelanea[0]->title."'>
+              <div class='miscelaneas_content_image' style='background-image: url(".$miscelanea[0]->image_url.");'> </div>
+              <div class='miscelaneas_content_info'>
+                <p class='miscelaneas_content_title'> ".$miscelanea[0]->title." </p>              
+                <p class='miscelaneas_content_description'> ".$miscelanea[0]->description." </p>
+              </div>
+              
+            </div>
+          </a>
+          <div class='miscelaneas_content_separator'></div>";
+      }
+
+      $section .= "
+          <a class='miscelaneas_content_see_more' href='http://libertasmorelos.lo/node/'> ver m&aacute;s... </a>
+        </div>
+      </div>";
+
+      $block['subject'] = t(''); //This is miscelaneas Section Block
+      $block['content'] = $section;
+    }
+      break;
+  }
+  return $block;
+}

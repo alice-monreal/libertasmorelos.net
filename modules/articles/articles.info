@@ -1,0 +1,5 @@
+name = "My Articles Module"
+description = "Create an articles module"
+core = "7.x"
+php = "5.2.4"
+version = "7.x.1.0"

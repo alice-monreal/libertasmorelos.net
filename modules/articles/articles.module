@@ -1,0 +1,82 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function articles_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('My Articles'),
+  );
+
+  return $blocks;
+}
+
+function articles_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+    // Global $base_url;
+    // $path = current_path();
+
+    // Query to get article nodes (TO DO: Last 5 nodes with cover validation: ifnot add other(s)*)
+    $articles = db_query("SELECT nid, vid, uid, type, status FROM {node} WHERE type = :type", array(':type' => 'articulo'))->fetchAll();
+
+    // Cover image slides array
+    $covers = array();
+
+    // Go over each article node (TO DO: Get the extra info: title, description)
+    foreach ($articles as $article) {
+    	$a_id = $article->nid;
+
+    	// Execute queries to get slide info: image, title, description.
+    	if (is_numeric($a_id)){
+    		$image_cover = db_query("SELECT entity_id, revision_id, field_image_cover_fid FROM {field_data_field_image_cover} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+
+	    	$ic_fid = $image_cover->field_image_cover_fid;
+    		if (is_numeric($ic_fid)){
+		    	$image_cover_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $ic_fid))->fetchObject();
+
+	    		$icf_name = $image_cover_file->filename;
+	    		array_push($covers, $icf_name);
+			}
+		    else {
+		    	$image_cover_file = "no page"; //change for a _default_ image *
+		    }
+    	}
+    	else{
+    		$image_cover = "no page"; //change for a _default_ image *
+    	}
+	}
+	
+
+
+      $block['subject'] = t('This is my Articles Block');      
+      
+
+   //    $block['content'] = "
+   //    <div class='your-class'>
+   //      <div>
+   //      	<img src='".$base_url."/sites/default/files/".$covers[0]."'/>
+   //      </div>
+   //      <div>
+   //      	<img src='".$base_url."/sites/default/files/".$covers[1]."'/>
+   //      </div>
+   //      <div>
+   //      	<img src='".$base_url."/sites/default/files/".$covers[2]."'/>
+   //      </div>
+   //    </div>";
+
+      // array(
+      //   '#theme' => 'feed_icon',
+      //   '#url' => 'rss.xml',
+      //   '#title' => t('Syndicate'),
+      // );
+      break;
+  }
+  return $block;
+}

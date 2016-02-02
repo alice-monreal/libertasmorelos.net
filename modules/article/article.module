@@ -1,0 +1,112 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function article_section_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Deportes Section Slider'),
+  );
+
+  return $blocks;
+}
+
+function article_section_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+    Global $base_url;
+
+    // Query to get article nodes (TO DO: Last 5 nodes with cover validation: ifnot add other(s)*)
+    $articles = db_query("SELECT nid, vid, uid, type, status FROM {node} WHERE type = :type ORDER BY nid DESC LIMIT 5", array(':type' => 'articulo'))->fetchAll();
+
+    // Cover image slides array
+    $slides = array();
+
+    // Go over each article node (TO DO: Get the extra info: title, description)
+    foreach ($articles as $article){
+    	$a_id = $article->nid;
+
+    	// Execute queries to get slide info: image, title and description.
+    	if (is_numeric($a_id)){
+
+        // Get: Image.
+    		$image_cover = db_query("SELECT entity_id, revision_id, field_image_cover_fid FROM {field_data_field_image_cover} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+
+	    	$ic_fid = $image_cover->field_image_cover_fid;
+    		if (is_numeric($ic_fid)){
+		    	$image_cover_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $ic_fid))->fetchObject();
+          $image = $image_cover_file->filename;
+			  }
+		    else {
+		    	$image = "no page"; //change for a _default_ image *
+		    }
+
+        // Get: Title.
+        $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
+
+        $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+        $title = $title_field->field_title_value;
+
+        // Get: Description).
+        $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_description_value FROM {node} A INNER JOIN {field_data_field_description} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
+
+        $description_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+        $description = $description_field->field_description_value;        
+    	}
+    	else{
+    		$image = "no page"; //change for a _default_ image *
+        $title = 'hola';
+        $description = 'mundo';
+    	}
+      
+      $slide = array(
+        "id"    => $a_id,
+        "cover" => $image,
+        "title" => $title,            
+        "description" => $description,
+      );
+      array_push($slides, $slide);
+	  }
+
+    // Get current path
+    $path = current_path();
+
+    if($path == "node/6"){
+
+      $slider = "
+      <div class='deportes_title'> 
+          <p> Deportes </p>
+      </div>
+      <div class='deportes_slider'>
+      ";
+      foreach ($slides as $slide) {
+        $url = '"'.$base_url.'/sites/default/files/'.$slide['cover'].'"';
+
+        // Link: Redirect to HOME if the article validation is empty.
+        $slider .= 
+        " <a href='http://libertasmorelos.lo/node/".$slide['id']."'>
+            <div class='deportes_slide'>
+            	<div class='deportes_slide_background' style='background-image: url(".$url.")'>
+                <div class='deportes_slide_info'>
+                  <p class='deportes_slide_title'>".$slide['title']."</p>
+                  <p class='deportes_slide_description'>".$slide['description']."</p>
+                </div>
+              </div>
+            </div>
+          </a>";
+      }
+      $slider .= "</div>";
+
+      $block['subject'] = t(''); //This is my deportes Articles Slider Block
+      $block['content'] = $slider;
+    }
+    break;
+  }
+  return $block;
+}

@@ -1,0 +1,42 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function publicidad_horizontal_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Publicidad Horizontal Module'),
+  );
+
+  return $blocks;
+}
+
+function publicidad_horizontal_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+      Global $base_url;
+
+      // Agregar funcionalidad (desde bd) de la publicidad
+
+      // Get current path
+      $path = current_path();
+      if($path == "node/6"){
+        $section = "
+        <div class='publicidad_horizontal_container'>
+          <p class='publicidad_horizontal_text'> Publicidad </p>
+        </div>
+        ";
+        $block['subject'] = t(''); //This is publicidad horizontal Block
+        $block['content'] = $section;
+      }
+      
+      break;
+  }
+  return $block;
+}

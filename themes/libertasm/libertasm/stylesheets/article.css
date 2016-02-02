@@ -1,0 +1,362 @@
+/* line 1, ../sass/article.scss */
+#content.column {
+  width: 100%;
+}
+/* line 3, ../sass/article.scss */
+#content.column .section {
+  /*width: 750px;*/
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* line 10, ../sass/article.scss */
+.article_cover_container {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 330px;
+  background-size: cover;
+  background-position: center;
+  background-color: #ccc;
+  background-repeat: no-repeat;
+}
+/* line 19, ../sass/article.scss */
+.article_cover_container .article_cover_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-image: url("../../images/menu-mask-slide-2.png");
+  overflow: hidden;
+}
+/* line 27, ../sass/article.scss */
+.article_cover_container .article_cover_content .article_wrapper {
+  position: absolute;
+  max-height: 250px;
+  bottom: 70px;
+}
+/* line 31, ../sass/article.scss */
+.article_cover_container .article_cover_content .article_wrapper .article_cover_title {
+  display: block;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 625px;
+  max-height: 115px;
+  margin: 0 0 0 45px;
+  padding: 0;
+  font-family: robotoItalic, Helvetica, sans-serif;
+  font-size: 42px;
+  /*font-weight: 200;
+  font-style: italic;*/
+  color: #fff;
+  text-shadow: 2px 2px 2px #000;
+  /*border: solid 1px;*/
+}
+/* line 48, ../sass/article.scss */
+.article_cover_container .article_cover_content .article_wrapper .article_cover_description {
+  display: block;
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 525px;
+  max-height: 95px;
+  margin: 20px 0 0 65px;
+  font-family: robotoItalic, Helvetica, sans-serif;
+  font-size: 16px;
+  /*font-weight: 200;
+  font-style: italic;*/
+  color: #fff;
+  text-shadow: 2px 2px 2px #000;
+  /*border: solid 1px;*/
+}
+
+/* line 68, ../sass/article.scss */
+.article_social_buttons {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 35px;
+  margin: 15px 0 0;
+  background-color: #fff;
+}
+/* line 76, ../sass/article.scss */
+.article_social_buttons p {
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 84, ../sass/article.scss */
+.article_container {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 50px;
+  margin: 5px 0 0;
+  background-color: #ececeb;
+}
+/* line 92, ../sass/article.scss */
+.article_container p {
+  display: block;
+  position: relative;
+  margin: 0;
+  font-family: robotoCondesedRegular, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 100, ../sass/article.scss */
+.article_container p.ac_title {
+  margin: 0 15px 0 30px;
+  padding: 25px 0 0;
+  font-size: 30px;
+}
+/* line 105, ../sass/article.scss */
+.article_container p.ac_author_date {
+  margin: 0 15px 0 30px;
+  font-family: robotoLightItalic, Helvetica, sans-serif;
+  font-size: 14px;
+}
+/* line 110, ../sass/article.scss */
+.article_container p.ac_body {
+  margin: 40px 15px 0 25px;
+  padding: 0 0 65px;
+  font-family: latoRegular, Helvetica, sans-serif;
+  font-size: 16px;
+}
+/* line 117, ../sass/article.scss */
+.article_container .article_adds {
+  display: block;
+  position: relative;
+  clear: both;
+  float: right;
+  width: 275px;
+  height: 345px;
+  margin: 0;
+  padding: 0;
+  background-color: #ececeb;
+  border-bottom: #fff 15px solid;
+  border-left: #fff 15px solid;
+}
+/* line 129, ../sass/article.scss */
+.article_container .article_adds p {
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 138, ../sass/article.scss */
+.article_images_gallery {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 50px;
+  margin: 25px 0 0;
+  background-color: #fff;
+}
+/* line 146, ../sass/article.scss */
+.article_images_gallery p {
+  font-family: robotoCondesedLight, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 154, ../sass/article.scss */
+.article_releated_notes {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 50px;
+  margin: 25px 0 0;
+  padding: 25px 0;
+  background-color: #ececeb;
+}
+/* line 163, ../sass/article.scss */
+.article_releated_notes p {
+  margin: 0 30px 30px;
+  /*padding: 25px 0 0;*/
+  font-family: robotoCondesedLight, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 170, ../sass/article.scss */
+.article_releated_notes p.enlaces {
+  margin: 0 0 0 30px;
+  /*padding: 0;*/
+  font-size: 19px;
+}
+
+/* line 178, ../sass/article.scss */
+.article_comments {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 50px;
+  margin: 25px 0 0;
+  background-color: #ececeb;
+}
+/* line 186, ../sass/article.scss */
+.article_comments p {
+  margin: 0 0 0 30px;
+  padding: 25px 0 15px;
+  font-family: robotoCondesedLight, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 196, ../sass/article.scss */
+.fb-comments.fb_iframe_widget {
+  margin: 0 0 25px 50px;
+}
+/* line 198, ../sass/article.scss */
+.fb-comments.fb_iframe_widget span {
+  width: 650px !important;
+}
+/* line 200, ../sass/article.scss */
+.fb-comments.fb_iframe_widget span iframe {
+  width: 650px !important;
+}
+
+/* line 206, ../sass/article.scss */
+.article_comment_form {
+  display: block;
+  position: relative;
+  clear: both;
+  width: 100%;
+  min-height: 0;
+  margin: 25px 0 0;
+  background-color: #ececeb;
+}
+/* line 214, ../sass/article.scss */
+.article_comment_form p {
+  font-family: Lato, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 222, ../sass/article.scss */
+.service-links .item-list ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+/* line 227, ../sass/article.scss */
+.article_social_buttons .item-list ul li {
+  float: right;
+  margin: 0;
+}
+/* line 230, ../sass/article.scss */
+.article_social_buttons .item-list ul li.first {
+  padding: 10px 0 0 10px;
+}
+/* line 233, ../sass/article.scss */
+.article_social_buttons .item-list ul li.last {
+  padding: 7px 10px 0 0;
+}
+
+/* line 238, ../sass/article.scss */
+.article_igallery_slider, .article_igallery_slide {
+  width: 750px;
+  height: 156px;
+  margin: 0 auto;
+}
+
+/* line 245, ../sass/article.scss */
+.article_igallery_slider .slick-prev {
+  left: -25px;
+  margin: -15px 0 0;
+}
+/* line 249, ../sass/article.scss */
+.article_igallery_slider .article_igallery_slide {
+  position: relative;
+  width: 205px;
+  height: 150px;
+  background-color: #e5e1e1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* line 258, ../sass/article.scss */
+.article_igallery_slider .slick-next {
+  right: -25px;
+  margin: -15px 0 0;
+}
+
+/* line 264, ../sass/article.scss */
+.modalDialog {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99999;
+  opacity: 0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+
+/* line 279, ../sass/article.scss */
+.modalDialog:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* line 283, ../sass/article.scss */
+.modalDialog > div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999);
+}
+
+/* line 294, ../sass/article.scss */
+.close {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -10px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -moz-box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  box-shadow: 1px 1px 3px #000;
+}
+
+/* line 312, ../sass/article.scss */
+.close:hover {
+  background: #00d9ff;
+}
+
+/* line 316, ../sass/article.scss */
+.fancybox-custom .fancybox-skin {
+  box-shadow: 0 0 50px #222;
+}

@@ -1,0 +1,5 @@
+name = "My Recent Articles Slider Module"
+description = "Create a recent article slider module"
+core = "7.x"
+php = "5.2.4"
+version = "7.x.1.0"

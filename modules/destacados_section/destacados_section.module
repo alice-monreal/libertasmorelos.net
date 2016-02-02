@@ -23,62 +23,83 @@ function destacados_section_block_view($delta = '') {
     Global $base_url;
 
     $destacados = array();
-    $destacadosTitles = array(0 => "ejecutivo", 1 => "legislativo", 2 => "judicial");
-    // print_r("destacadosTitles: ");
-    // print_r($destacadosTitles);
+    
+    $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_visited_value 
+      FROM {node} A 
+      INNER JOIN {field_data_field_visited} B ON A.nid = B.entity_id 
+      WHERE A.type = :type 
+      ORDER BY B.field_visited_value DESC LIMIT 3";
+    $destacado = db_query($query, array(':type' => 'articulo'))->fetchAll();
+    // print_r("destacado! -> ");
+    // print_r($destacado);
+
     for($i = 0; $i < 3; $i++){
-      $item = $i+1;
-      $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
-      $destacado = db_query($query, array(':type' => 'articulo'))->fetchAll();
+      if($destacado[$i]->nid){
+        
+        $a_id = $destacado[$i]->nid;
 
-      if(!empty($destacado)){
-        $a_id = $destacado[0]->nid;
-
-        // Execute queries to get slide info: image, title (description).
+        // Execute queries to get slide info: image, title and description.
         if (is_numeric($a_id)){
+          // Define: node id.
+          $d_id = $a_id;
 
           // Get: Image.
-          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid 
+              FROM {field_data_field_image_profile} 
+              WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
 
           $i_fid = $image->field_image_profile_fid;
           if (is_numeric($i_fid)){
-            $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+            $image_profile_file = db_query("SELECT fid, uid, filename 
+                FROM {file_managed} 
+                WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
             $image_file = $image_profile_file->filename;
           }
           else{
             $image_file = "gente.png"; //default image 
           }
 
-          // Get: Title (description).
-          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
-
+          // Get: Title.
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value 
+            FROM {node} A 
+            INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id 
+            WHERE B.entity_id = :e_id";
           $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
           $title = $title_field->field_title_value;
+          
+          // Get: Description.
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_description_value 
+            FROM {node} A 
+            INNER JOIN {field_data_field_description} B ON A.nid = B.entity_id 
+            WHERE B.entity_id = :e_id";
+          $description_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+          $description = $description_field->field_description_value;
         }
         else{
+          $d_id = 6;
           $image_file = "gente.png"; //default image 
           $title = "No title"; //default title
+          $description = "No description"; //default description
         }        
       }
       else{
+        $d_id = 6;
         $image_file = "gente.png";
         $title = "No title";
+        $description = "No description";
       }
 
+      $destacados[$i]->id = $d_id;
+      $destacados[$i]->num = $i;
+
       $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
-      $destacado[0]->image_name = $image_file;
-      $destacado[0]->image_url  = $image_url;
+      $destacados[$i]->image_name = $image_file;
+      $destacados[$i]->image_url  = $image_url;
+      
+      $destacados[$i]->title = $title;
 
-      $destacado[0]->description = $title; 
-
-      $destacado[0]->title = $destacadosTitles[$i];
-
-      array_push($destacados, $destacado);
+      $destacados[$i]->description = $description;
     }
-
-    // print_r('destacados -> ');
-    // print_r($destacados);
-
 
     // Get current path
     $path = current_path();
@@ -91,18 +112,16 @@ function destacados_section_block_view($delta = '') {
         </div>
         <div class='destacados_container'>";
 
-      foreach ($destacados as $destacado) {
-        // print_r("destacado");
-        // print_r($destacado);
+      foreach ($destacados as $des) {
         // Link: Redirect to HOME if the article validation is empty.
         $section .= "
-          <a href='http://libertasmorelos.lo/node/".$destacado[0]->nid."'>
-          <div class='destacados_content ".$destacado[0]->title."'> 
-            <p class='destacados_content_title'> ".$destacado[0]->title." </p>
-            <div class='destacados_content_image' style='background-image: url(".$destacado[0]->image_url.");'> </div>
-            <p class='destacados_content_description'> ".$destacado[0]->description." </p>
-            <div class='destacados_content_separator'></div>
-          </div>
+          <a href='http://libertasmorelos.lo/node/".$des->id."'>
+            <div class='destacados_content ".$des->title."'> 
+              <p class='destacados_content_title'> ".$des->title." </p>
+              <div class='destacados_content_image' style='background-image: url(".$des->image_url.");'> </div>
+              <p class='destacados_content_description'> ".$des->description." </p>
+              <div class='destacados_content_separator num_".$des->num."'></div>
+            </div>
           </a>";
       }
 

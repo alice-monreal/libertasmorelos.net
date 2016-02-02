@@ -109,7 +109,6 @@ function regiones_section_block_view($delta = '') {
     // print_r('regiones -> ');
     // print_r($regiones);
 
-
     // Get current path
     $path = current_path();
     if($path == "node/6"){

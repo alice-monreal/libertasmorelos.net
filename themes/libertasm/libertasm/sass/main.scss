@@ -461,7 +461,7 @@
 		display: block;
 		position: relative;
 		width: 410px;
-	    height: 398px;
+	    height: 405px;
 	    margin: 10px 0 0;
 	    background-color: #e5e1e1;	    
 	    overflow: hidden;
@@ -515,6 +515,9 @@
 			    margin: 0 auto;
 			    padding: 10px 0 0;
 			    border-bottom: #bbbbbb solid 1px;
+			    &.num_2{
+			    	display: none;
+			    }
 			}
 		}
 	}

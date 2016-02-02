@@ -242,13 +242,26 @@
 
         if($content_type == "articulo"){
 
-          // $query = db_update('node')
-          //   // ->expression('MYFIELD', 'MYFIELD + 1')
+          // Counter process
+
+          $query       = "SELECT A.entity_id, A.field_visited_value FROM {field_data_field_visited} A WHERE A.entity_id = ".$node->nid." LIMIT 1";
+          $fdfVisited  = db_query($query)->fetchAll();
+          $visitedValue= intval($fdfVisited[0]->field_visited_value);
+
+          $query = db_update('field_data_field_visited')
+            ->fields(array(
+              'field_visited_value' => $visitedValue + 1,
+            ))
+            ->condition('entity_id', $node->nid, '=')
+            ->execute();
+
+          // Article is created by default '0' value on field_visited_value
+          // $nid = db_insert('node')
           //   ->fields(array(
-          //     'nid' => 14,
-          //     'status' => 1,
+          //     'title' => 'Example',
+          //     'uid' => 3,
+          //     'created' => REQUEST_TIME,
           //   ))
-          //   ->condition('MYFIELD', $SOMEVARIABLE)
           //   ->execute();
 
           // Cover Image

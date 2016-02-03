@@ -230,7 +230,7 @@
   position: relative;
   background-color: #c5c5c5;
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   background-repeat: no-repeat;
 }
 
@@ -846,7 +846,7 @@
 /* line 755, ../sass/main.scss */
 .deportes_slide_background {
   position: relative;
-  background-position: center;
+  background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #c5c5c5;

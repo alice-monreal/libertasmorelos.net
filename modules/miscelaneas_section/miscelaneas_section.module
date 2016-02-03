@@ -26,58 +26,132 @@ function miscelaneas_section_block_view($delta = '') {
     $miscelaneasTitles = array(0 => "ejecutivo", 1 => "legislativo", 2 => "judicial");
     // print_r("miscelaneasTitles: ");
     // print_r($miscelaneasTitles);
+
+    $clasification = 24;
+    $articles = db_query("SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value
+                          FROM {node} A
+                          INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id 
+                          WHERE A.type = :type AND B.field_type_value =  ".$clasification." 
+                          ORDER BY nid DESC LIMIT 2", 
+                          array(':type' => 'articulo'))->fetchAll();
+
     for($i = 0; $i < 2; $i++){
-      $item = $i+1;
-      $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
-      $miscelanea = db_query($query, array(':type' => 'articulo'))->fetchAll();
+      if($articles[$i]->nid){
+        
+        $a_id = $articles[$i]->nid;
 
-      if(!empty($miscelanea)){
-        $a_id = $miscelanea[0]->nid;
-
-        // Execute queries to get slide info: image, title (description).
+        // Execute queries to get slide info: image, title and description.
         if (is_numeric($a_id)){
+          // Define: node id.
+          $d_id = $a_id;
 
           // Get: Image.
-          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid 
+              FROM {field_data_field_image_profile} 
+              WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
 
           $i_fid = $image->field_image_profile_fid;
           if (is_numeric($i_fid)){
-            $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+            $image_profile_file = db_query("SELECT fid, uid, filename 
+                FROM {file_managed} 
+                WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
             $image_file = $image_profile_file->filename;
           }
           else{
             $image_file = "gente.png"; //default image 
           }
 
-          // Get: Title (description).
-          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
-
+          // Get: Title.
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value 
+            FROM {node} A 
+            INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id 
+            WHERE B.entity_id = :e_id";
           $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
           $title = $title_field->field_title_value;
+          
+          // Get: Description.
+          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_description_value 
+            FROM {node} A 
+            INNER JOIN {field_data_field_description} B ON A.nid = B.entity_id 
+            WHERE B.entity_id = :e_id";
+          $description_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+          $description = $description_field->field_description_value;
         }
         else{
+          $d_id = 6;
           $image_file = "gente.png"; //default image 
           $title = "No title"; //default title
+          $description = "No description"; //default description
         }        
       }
       else{
+        $d_id = 6;
         $image_file = "gente.png";
         $title = "No title";
+        $description = "No description";
       }
 
+      $miscelaneas[$i]->id = $d_id;
+      $miscelaneas[$i]->num = $i;
+
       $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
-      $miscelanea[0]->image_name = $image_file;
-      $miscelanea[0]->image_url  = $image_url;
+      $miscelaneas[$i]->image_name = $image_file;
+      $miscelaneas[$i]->image_url  = $image_url;
+      
+      $miscelaneas[$i]->title = $title;
 
-      $miscelanea[0]->description = $title; 
-
-      $miscelanea[0]->title = $miscelaneasTitles[$i];
-
-      array_push($miscelaneas, $miscelanea);
+      $miscelaneas[$i]->description = $description;
     }
 
-    // print_r('miscelaneas -> ');
-    // print_r($miscelaneas);
+    // for($i = 0; $i < 2; $i++){
+    //   $item = $i+1;
+    //   $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
+    //   $miscelanea = db_query($query, array(':type' => 'articulo'))->fetchAll();
+
+    //   if(!empty($miscelanea)){
+    //     $a_id = $miscelanea[0]->nid;
+
+    //     // Execute queries to get slide info: image, title (description).
+    //     if (is_numeric($a_id)){
+
+    //       // Get: Image.
+    //       $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
+
+    //       $i_fid = $image->field_image_profile_fid;
+    //       if (is_numeric($i_fid)){
+    //         $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+    //         $image_file = $image_profile_file->filename;
+    //       }
+    //       else{
+    //         $image_file = "gente.png"; //default image 
+    //       }
+
+    //       // Get: Title (description).
+    //       $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
+
+    //       $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
+    //       $title = $title_field->field_title_value;
+    //     }
+    //     else{
+    //       $image_file = "gente.png"; //default image 
+    //       $title = "No title"; //default title
+    //     }        
+    //   }
+    //   else{
+    //     $image_file = "gente.png";
+    //     $title = "No title";
+    //   }
+
+    //   $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
+    //   $miscelanea[0]->image_name = $image_file;
+    //   $miscelanea[0]->image_url  = $image_url;
+
+    //   $miscelanea[0]->description = $title; 
+
+    //   $miscelanea[0]->title = $miscelaneasTitles[$i];
+
+    //   array_push($miscelaneas, $miscelanea);
+    // }
 
 
     // Get current path
@@ -92,16 +166,14 @@ function miscelaneas_section_block_view($delta = '') {
         <div class='miscelaneas_container'>";
 
       foreach ($miscelaneas as $miscelanea) {
-        // print_r("miscelanea");
-        // print_r($miscelanea);
         // Link: Redirect to HOME if the article validation is empty.
         $section .= "
-          <a href='http://libertasmorelos.lo/node/".$miscelanea[0]->nid."'>
-            <div class='miscelaneas_content ".$miscelanea[0]->title."'>
-              <div class='miscelaneas_content_image' style='background-image: url(".$miscelanea[0]->image_url.");'> </div>
+          <a href='http://libertasmorelos.lo/node/".$miscelanea->id."'>
+            <div class='miscelaneas_content ".$miscelanea->title."'>
+              <div class='miscelaneas_content_image' style='background-image: url(".$miscelanea->image_url.");'> </div>
               <div class='miscelaneas_content_info'>
-                <p class='miscelaneas_content_title'> ".$miscelanea[0]->title." </p>              
-                <p class='miscelaneas_content_description'> ".$miscelanea[0]->description." </p>
+                <p class='miscelaneas_content_title'> ".$miscelanea->title." </p>              
+                <p class='miscelaneas_content_description'> ".$miscelanea->description." </p>
               </div>
               
             </div>

@@ -139,10 +139,10 @@ function opiniones_section_block_view($delta = '') {
     // Get data of: opiniones random
     $opiniones_random = get_opinion_data($opinion_random, false);
     
-    print_r(" ++++ opiniones_fijas +++ ");
-    print_r($opiniones_fijas);
-    print_r(" +++ opiniones_random +++ ");
-    print_r($opiniones_random);
+    // print_r(" ++++ opiniones_fijas +++ ");
+    // print_r($opiniones_fijas);
+    // print_r(" +++ opiniones_random +++ ");
+    // print_r($opiniones_random);
     
     // Get current path
     $path = current_path();
@@ -195,8 +195,6 @@ function opiniones_section_block_view($delta = '') {
       foreach ($opiniones_random as $opn) {
         // Link: Redirect to HOME if the article validation is empty.
 
-        print_r(" ---> ");
-        print_r($count%2);
         if($count%2 === 0){
           $section .= "          
             <div class='opiniones_slide'>

@@ -22,8 +22,14 @@ function deportes_section_block_view($delta = '') {
     case 'articles':
     Global $base_url;
 
+    $clasification = 23;
     // Query to get article nodes (TO DO: Last 5 nodes with cover validation: ifnot add other(s)*)
-    $articles = db_query("SELECT nid, vid, uid, type, status FROM {node} WHERE type = :type ORDER BY nid DESC LIMIT 5", array(':type' => 'articulo'))->fetchAll();
+    $articles = db_query("SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value
+                          FROM {node} A
+                          INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id 
+                          WHERE A.type = :type AND B.field_type_value =  ".$clasification." 
+                          ORDER BY nid DESC LIMIT 3", 
+                          array(':type' => 'articulo'))->fetchAll();
 
     // Cover image slides array
     $slides = array();

@@ -18,7 +18,7 @@ jQuery( document ).ready(function( $ ) {
 	});
 
 	$('.deportes_slider').slick({
-		// autoplay: true,    
+		autoplay: true,    
 	    dots: true,
 	    infinite: true,
 	    speed: 300,

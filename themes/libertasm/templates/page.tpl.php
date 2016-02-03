@@ -537,9 +537,7 @@
       <?php
         }
         else{
-          print_r("monreal!");
           print render($page['content']);
-          // print_r ($page['content']);
         }
 
       ?>

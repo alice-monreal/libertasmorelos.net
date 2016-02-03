@@ -58,7 +58,8 @@ function regiones_section_block_view($delta = '') {
     for($i = 0; $i < $regionesTotal; $i++){
       $item = $i+1;
       $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id 
-        WHERE A.type = :type AND B.field_type_value = ".$regionesTitles[$i]['id']." ORDER BY nid DESC LIMIT 1";
+        WHERE A.type = :type AND B.field_type_value = ".$regionesTitles[$i]['id']." 
+        ORDER BY nid DESC LIMIT 1";
       $region = db_query($query, array(':type' => 'articulo'))->fetchAll();
 
       if(!empty($region)){

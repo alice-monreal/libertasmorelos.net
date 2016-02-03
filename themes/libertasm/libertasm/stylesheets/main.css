@@ -1074,7 +1074,7 @@
 .opiniones_slider .opiniones_slide .opiniones_wrapper .opiniones_link .opiniones_content .opiniones_content_info {
   float: left;
   max-width: 255px;
-  max-height: 67px;
+  max-height: 75px;
   overflow: hidden;
 }
 /* line 972, ../sass/main.scss */
@@ -1085,7 +1085,7 @@
 }
 /* line 977, ../sass/main.scss */
 .opiniones_slider .opiniones_slide .opiniones_wrapper .opiniones_link .opiniones_content .opiniones_content_info .opiniones_content_description {
-  height: 30px;
+  height: 40px;
   font-family: robotoCondesedLight, Helvetica, sans-serif;
   font-size: 13px;
 }

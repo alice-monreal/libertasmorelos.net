@@ -14,6 +14,97 @@ function opiniones_section_block_info(){
   return $blocks;
 }
 
+function get_opinion_data($opinion_query, $opinion_type=true) {
+  $opiniones = array();
+  $opinion_length = sizeof($opinion_query);
+
+  for($ij=0; $ij<$opinion_length; $ij++){
+
+    if($opinion_type){
+      $opinion = $opinion_query[$ij][0];
+    }
+    else{
+      $opinion = $opinion_query[$ij];
+    }
+    
+    if(!empty($opinion)){
+      // Get opinion id.
+      $o_id = $opinion->nid;
+      // Execute queries to get slide info: image, title (description).
+      if (is_numeric($o_id)){
+        // Define: node id.
+        $d_id = $o_id;
+
+        // Get: Image.
+        $image = db_query("SELECT entity_id, revision_id, field_opinion_profile_fid 
+                           FROM {field_data_field_opinion_profile} 
+                           WHERE entity_id = :eid", array(':eid' => $o_id))->fetchObject();
+
+        $i_fid = $image->field_opinion_profile_fid;
+        if (is_numeric($i_fid)){
+          $image_profile_file = db_query("SELECT fid, uid, filename 
+                                          FROM {file_managed} 
+                                          WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
+          $image_file = $image_profile_file->filename;
+        }
+        else{
+          $image_file = "gente.png"; //default image 
+        }
+
+        // Get: Title.
+        $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, A.title
+                  FROM {node} A
+                  WHERE A.nid = :nid";
+        $title_field = db_query($query, array(':nid' => $o_id))->fetchObject();
+        $title = $title_field->title;
+
+        // Get: Author.
+        $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_opinion_author_value 
+                  FROM {node} A 
+                  INNER JOIN {field_data_field_opinion_author} B ON A.nid = B.entity_id 
+                  WHERE B.entity_id = :e_id";
+        $author_field = db_query($query, array(':e_id' => $o_id))->fetchObject();
+        $author = $author_field->field_opinion_author_value;
+
+        // Get: Description.
+        $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_opinion_summary_value 
+                  FROM {node} A 
+                  INNER JOIN {field_data_field_opinion_summary} B ON A.nid = B.entity_id 
+                  WHERE B.entity_id = :e_id";
+        $description_field = db_query($query, array(':e_id' => $o_id))->fetchObject();
+        $description = $description_field->field_opinion_summary_value;
+
+      }
+      else{
+        $d_id = 6;
+        $image_file = "gente.png"; //default image 
+        $title = "No title"; //default title
+        $author = "No author"; //default author
+        $description = "No description"; //default description
+      }        
+    }
+    else{
+      $d_id = 6;
+      $image_file = "gente.png";
+      $title = "No title";
+      $author = "No author";
+      $description = "No description";
+    }
+
+    $opiniones[$ij]->id = $d_id;
+    $opiniones[$ij]->num = $ij;
+
+    $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
+    $opiniones[$ij]->image_name = $image_file;
+    $opiniones[$ij]->image_url  = $image_url;
+    
+    $opiniones[$ij]->title = $title;
+    $opiniones[$ij]->author = $author;
+    $opiniones[$ij]->description = $description;
+  }
+  return $opiniones;
+}
+
 function opiniones_section_block_view($delta = '') {
   // This example is adapted from node.module.
   $block = array();
@@ -22,68 +113,41 @@ function opiniones_section_block_view($delta = '') {
     case 'articles':
     Global $base_url;
 
-    $opiniones = array();
-    $opinionesTitles = array(3 => "norte", 4 => "centro", 5 => "sur", 6 => "poniente");
-    // print_r("opinionesTitles: ");
-    // print_r($opinionesTitles);
-    for($i = 3; $i < 7; $i++){
-      $item = $i+1;
-      $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
-      $opinion = db_query($query, array(':type' => 'articulo'))->fetchAll();
+    // OPINIONES FIJAS
+    $usuarios_fijos = array( 0 => 19, 1 => 20, 2 => 2 );
+    
+    $opinion_fija = array();
 
-      if(!empty($opinion)){
-        $a_id = $opinion[0]->nid;
-
-        // Execute queries to get slide info: image, title (description).
-        if (is_numeric($a_id)){
-
-          // Get: Image.
-          $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
-
-          $i_fid = $image->field_image_profile_fid;
-          if (is_numeric($i_fid)){
-            $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
-            $image_file = $image_profile_file->filename;
-          }
-          else{
-            $image_file = "gente.png"; //default image 
-          }
-
-          // Get: Title (description).
-          $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
-
-          $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
-          $title = $title_field->field_title_value;
-        }
-        else{
-          $image_file = "gente.png"; //default image 
-          $title = "No title"; //default title
-        }        
-      }
-      else{
-        $image_file = "gente.png";
-        $title = "No title";
-      }
-
-      $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
-      $opinion[0]->image_name = $image_file;
-      $opinion[0]->image_url  = $image_url; // str_replace(" ", "%20", $image_url);
-
-      $opinion[0]->description = $title; 
-
-      $opinion[0]->title = $opinionesTitles[$i];
-
-      array_push($opiniones, $opinion);
+    for($i=0; $i<3; $i++){
+      $query_fijas = "SELECT A.nid, A.vid, A.uid, A.type, A.status 
+                      FROM {node} A
+                      WHERE A.type = :type 
+                        AND A.uid = ".$usuarios_fijos[$i]." ORDER BY nid DESC LIMIT 1";
+      $opinion_fija[$i] = db_query($query_fijas, array(':type' => 'opinion'))->fetchAll();
     }
+    // Get data of: opiniones fijas
+    $opiniones_fijas = get_opinion_data($opinion_fija, true);
 
-    // print_r('opiniones -> ');
-    // print_r($opiniones);
-
-
+    // OPINIONES RANDOM
+    $query_random = "SELECT A.nid, A.vid, A.uid, A.type, A.status 
+              FROM {node} A
+              WHERE A.type = :type 
+                AND A.uid != ".$usuarios_fijos[0]." 
+                AND A.uid != ".$usuarios_fijos[1]." 
+                AND A.uid != ".$usuarios_fijos[2]." ORDER BY nid DESC LIMIT 12";
+    $opinion_random = db_query($query_random, array(':type' => 'opinion'))->fetchAll();
+    // Get data of: opiniones random
+    $opiniones_random = get_opinion_data($opinion_random, false);
+    
+    print_r(" ++++ opiniones_fijas +++ ");
+    print_r($opiniones_fijas);
+    print_r(" +++ opiniones_random +++ ");
+    print_r($opiniones_random);
+    
     // Get current path
     $path = current_path();
     if($path == "node/6"){
-      //opiniones_slider
+
       $section = "
       <div class='opiniones_section'>
         <div class='opiniones_title'> 
@@ -91,69 +155,80 @@ function opiniones_section_block_view($delta = '') {
         </div>
         <div class='opiniones_container'>";
 
-      $fix_prof_image = '"'.'http://libertasmorelos.lo/sites/default/files/opinion_user.png'.'"';
-      // Sección fija
+      // SECCIÓN FIJA
       $section .= "
       <div class='opiniones_fix_container'>
-        <a href='' class='opiniones_fix_link'>
+        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[0]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
-            <div class='opiniones_fix_image' style='background-image: url(".$fix_prof_image.");'> </div>
+            <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[0]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
-              <p class='opiniones_fix_title'> Desde los Laureles por Teodoro Renter&iacute;a </p>
-              <p class='opiniones_fix_description'> This is the description. Leer m&aacute;s... </p>
+              <p class='opiniones_fix_title'> Desde los Laureles por ".$opiniones_fijas[0]->title." </p>
+              <p class='opiniones_fix_description'> ".$opiniones_fijas[0]->title." Leer m&aacute;s... </p>
             </div>
           </div>
         </a>
-        <a href='' class='opiniones_fix_link'>
+        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[1]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
-            <div class='opiniones_fix_image' style='background-image: url(".$fix_prof_image.");'> </div>
+            <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[1]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
-              <p class='opiniones_fix_title'> La ley de Herodes por  </p>
-              <p class='opiniones_fix_description'> This is the description. Leer m&aacute;s... </p>
+              <p class='opiniones_fix_title'> La ley de Herodes por ".$opiniones_fijas[2]->author." </p>
+              <p class='opiniones_fix_description'> ".$opiniones_fijas[1]->title." Leer m&aacute;s... </p>
             </div>
           </div>
         </a>
-        <a href='' class='opiniones_fix_link'>
+        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[2]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
-            <div class='opiniones_fix_image' style='background-image: url(".$fix_prof_image.");'> </div>
+            <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[2]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
-              <p class='opiniones_fix_title'> Contratiempo por </p>
-              <p class='opiniones_fix_description'> This is the description. Leer m&aacute;s... </p>
+              <p class='opiniones_fix_title'> Contratiempo por ".$opiniones_fijas[2]->author." </p>
+              <p class='opiniones_fix_description'> ".$opiniones_fijas[2]->title." Leer m&aacute;s... </p>
             </div>
           </div>
         </a>
       </div>
       " ; 
+
+      // SECCIÓN RANDOM
       $section .= "<div class='opiniones_slider'>";
 
-      foreach ($opiniones as $opinion) {
-        // print_r("opinion");
-        // print_r($opinion);
+      $count = 0;
+      foreach ($opiniones_random as $opn) {
         // Link: Redirect to HOME if the article validation is empty.
-        $section .= "          
-          <div class='opiniones_slide'>
-            <div class='opiniones_wrapper'>
-              <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opinion[0]->nid."'>
-                <div class='opiniones_content ".$opinion[0]->title."'>
-                  <div class='opiniones_content_image' style='background-image: url(".$opinion[0]->image_url.");'> </div>
-                  <div class='opiniones_content_info'>
-                    <p class='opiniones_content_title'> ".$opinion[0]->title." </p>
-                    <p class='opiniones_content_description'> ".$opinion[0]->description.". Leer m&aacute;s... </p>
-                  </div>                
-                </div>
-              </a>
-              <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opinion[0]->nid."'>
-                <div class='opiniones_content ".$opinion[0]->title."'>
-                  <div class='opiniones_content_image' style='background-image: url(".$opinion[0]->image_url.");'> </div>
-                  <div class='opiniones_content_info'>
-                    <p class='opiniones_content_title'> ".$opinion[0]->title." </p>
-                    <p class='opiniones_content_description'> ".$opinion[0]->description.". Leer m&aacute;s... </p>
-                  </div>         
-                </div>
-              </a>
-            </div>
-          </div>
+
+        print_r(" ---> ");
+        print_r($count%2);
+        if($count%2 === 0){
+          $section .= "          
+            <div class='opiniones_slide'>
+              <div class='opiniones_wrapper'>
+                <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opn->id."'>
+                  <div class='opiniones_content ".$opn->title."'>
+                    <div class='opiniones_content_image' style='background-image: url(".$opn->image_url.");'> </div>
+                    <div class='opiniones_content_info'>
+                      <p class='opiniones_content_title'> ".$opn->title." </p>
+                      <p class='opiniones_content_description'> ".$opn->description.". Leer m&aacute;s... </p>
+                    </div>                
+                  </div>
+                </a>
           ";
+
+        }else{
+          $section .= "
+                <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opn->nid."'>
+                  <div class='opiniones_content ".$opn->title."'>
+                    <div class='opiniones_content_image' style='background-image: url(".$opn->image_url.");'> </div>
+                    <div class='opiniones_content_info'>
+                      <p class='opiniones_content_title'> ".$opn->title." </p>
+                      <p class='opiniones_content_description'> ".$opn->description.". Leer m&aacute;s... </p>
+                    </div>         
+                  </div>
+                </a>
+              </div>
+            </div>
+          ";
+
+        }
+        $count++;     
       }
 
       $section .= "</div>";

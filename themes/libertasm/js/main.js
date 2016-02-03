@@ -50,7 +50,6 @@ jQuery( document ).ready(function( $ ) {
   	}, 800);
 
   	// $(".fancybox").fancybox();
-
   	$(".fancybox-button").fancybox({
 		prevEffect		: 'none',
 		nextEffect		: 'none',

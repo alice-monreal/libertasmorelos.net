@@ -1043,7 +1043,7 @@
 .opiniones_slider {
   display: none;
   width: 755px;
-  height: 200px;
+  height: 220px;
   margin: 30px auto;
 }
 /* line 948, ../sass/main.scss */
@@ -1055,7 +1055,7 @@
 .opiniones_slider .opiniones_slide {
   position: relative;
   width: 365px;
-  height: 205px;
+  height: 220px;
   margin: 0 15px;
   background-color: #e5e1e1;
 }

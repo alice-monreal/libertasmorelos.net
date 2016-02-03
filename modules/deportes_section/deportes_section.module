@@ -82,7 +82,6 @@ function deportes_section_block_view($delta = '') {
 
     // Get current path
     $path = current_path();
-
     if($path == "node/6"){
 
       $slider = "

@@ -536,6 +536,51 @@
 
       <?php
         }
+        elseif($content_type == "lista"){
+          // print_r($content['body']['#object']->field_section['und'][0]['value']);
+
+          $index = 0;
+          $list_type = $content['body']['#object']->field_section['und'][0]['value'];
+
+          $test = alice_test($list_type, $index);
+          // print_r('test: ');
+          // print_r($test);
+          // print render($page['content']['list_section_list']['#markup']);
+
+          ?>
+            <p class="list_title"> Noticias <?php echo $test['type'][0]->title ?> </p>
+
+            <div class='lista_section'>
+              <div class='lista_title'> 
+                <p> Miscelanea </p>
+              </div>
+              <div class='lista_container'>
+
+          <?php
+            foreach ($test['items'] as $t) {
+              if($t->title != ""){
+              ?>
+                <a href='http://libertasmorelos.lo/node/<?php echo $t->id ?>'>
+                  <div class='lista_content <?php echo $t->title ?>'>
+                    <div class='lista_content_image' style='background-image: url(<?php echo $t->image_url ?>);'> </div>
+                    <div class='lista_content_info'>
+                      <p class='lista_content_title'> <?php echo $t->title ?> </p>              
+                      <p class='lista_content_description'> <?php echo $t->description ?> </p>
+                    </div>
+                    
+                  </div>
+                </a>                
+              <?php
+              }
+            }
+            // print_r($page['content']['list_section_list']['#markup']);
+            ?>
+                <a class='lista_content_see_more' href='http://libertasmorelos.lo/node/'> ver m&aacute;s... </a>
+              </div>
+            </div>
+
+        <?php
+        }
         else{
           print render($page['content']);
         }

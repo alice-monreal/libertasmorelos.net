@@ -1,0 +1,197 @@
+<?php
+
+/**
+ *@file
+ *contacto.module
+ *
+ */
+function contacto_block_info(){
+  // This example comes from node.module.
+  $blocks['contacto'] = array(
+    'info' => t('Contacto Section'),
+  );
+
+  return $blocks;
+}
+
+function contacto_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'contacto':
+      Global $base_url;
+
+      $section = "";
+
+      // Get current path
+      $path = current_path();
+      if($path == "node/5"){
+
+        // $section = "
+        //   <div class='contact_container'>
+        //     <p class='contact_title'> Conoce nuestras promociones </p>
+        //     <div class='contact_best'>
+        //       <div class='contact_best_section' id='pbs_1'> 
+        //         <p class='contact_best_title'> T&iacute;tulo </p>
+        //         <p class='contact_best_description'> Descricci&oacute;n </p>
+        //         <p class='contact_best_price'> Precio </p>
+        //         <div class='contact_best_button'>
+        //           <p class='contact_best_button_text'> Comenzar </p>
+        //         </div>
+        //       </div>
+        //       <div class='contact_best_section' id='pbs_2'> 
+        //         <p class='contact_best_title'> T&iacute;tulo </p>
+        //         <p class='contact_best_description'> Descricci&oacute;n </p>
+        //         <p class='contact_best_price'> Precio </p>
+        //         <div class='contact_best_button'>
+        //           <p class='contact_best_button_text'> Comenzar </p>
+        //         </div>
+        //       </div>
+        //       <div class='contact_best_section' id='pbs_3'> 
+        //         <p class='contact_best_title'> T&iacute;tulo </p>
+        //         <p class='contact_best_description'> Descricci&oacute;n </p>
+        //         <p class='contact_best_price'> Precio </p>
+        //         <div class='contact_best_button'>
+        //           <p class='contact_best_button_text'> Comenzar </p>
+        //         </div>
+        //       </div>
+        //     </div>
+        // ";
+        // for ($i=0; $i < 4; $i++) { 
+          
+        //   $section .= "
+        //       <div class='contact_more'>
+        //         <p class='contact_more_precio'> Precio </p>
+        //         <p class='contact_more_title'> T&iacute;tulo </p>
+        //         <p class='contact_more_description'> Descricci&oacute;n </p>
+        //       </div>
+        //   ";
+        // }
+
+        $section = "
+          <div class='c_container'>
+            <p class='c_title'> Cont&aacute;ctanos </p>
+            <p class='c_description'> Env&iacute;a tus comentarios o cont&aacute;ctanos directamente desde nuestras redes sociales. </p>          
+
+            <form class='contact_form'>
+              <div class='c_form_container'>
+                <div class='c_input_container'>
+
+                  <div class='c_input_content'>                
+                    <label class='c_name_label'> Nombre </label>
+                    <input class='c_name' type='text' name='c_name' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_name_label'> Apellido </label>
+                    <input class='c_name' type='text' name='c_name' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_email_label'> Correo Electr&oacute;nico </label>
+                    <input class='c_email' type='text' name='c_email' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_phone_label'> N&uacute;mero telef&oacute;nico </label>
+                    <input class='c_phone' type='text' name='c_phone' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_state_label'> Estado </label>
+                    <input class='c_state' type='text' name='c_state' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_city_label'> Delegaci&oacute;n o municipio </label>
+                    <input class='c_city' type='text' name='c_city' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_company_label'> Empresa </label>
+                    <input class='c_company' type='text' name='c_company' />
+                  </div>
+
+                  <div class='c_input_content'>
+                    <label class='c_position_label'> Puesto </label>
+                    <input class='c_position' type='text' name='c_position' />
+                  </div>
+                
+                <!-- <div class='c_textarea_container'> -->
+                  <label class='c_messsage_label'> Mensaje </label>
+                  <textarea class='c_message' name='c_message' form='usrform'></textarea>
+                <!-- </div> -->
+
+                <!-- <div class='c_checkbox_container'> -->
+                  <input class='c_paquete' type='checkbox' id='cc1' name='c_paquete'>
+                  <label for='cc1'><span></span> Desea recibir noticias </label>
+                <!-- </div> -->
+
+                  <input class='c_button' type='submit' value='Enviar'>
+
+                </div>
+
+                <div class='c_social_container'>
+                  <p class='c_social_title'> Redes sociales. </p>
+                  <a href=''>
+                    <div class='c_social_content'>
+                      <img class='c_social_image' src='http://libertasmorelos.lo/themes/libertasm/images/c_facebook.png' /> 
+                      <p class='c_social_name'> facebook.com/cuenta </p>
+                    </div>
+                  </a>
+                  <a href=''>
+                    <div class='c_social_content'>
+                      <img class='c_social_image' src='http://libertasmorelos.lo/themes/libertasm/images/c_twitter.png' /> 
+                      <p class='c_social_name'> twitter.com/cuenta </p>
+                    </div>
+                  </a>
+                  <a href=''>
+                    <div class='c_social_content'>
+                      <img class='c_social_image' src='http://libertasmorelos.lo/themes/libertasm/images/c_youtube.png' /> 
+                      <p class='c_social_name'> youtube.com/cuenta </p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class='c_data_container'>
+                  <p class='c_social_title'> Nuestros datos. </p>
+                  <div class='c_data_content'>
+                    <p class='c_data_name'> Nombre de la persona </p>
+                    <p class='c_data_phone'> Tel&eacute;fono </p>
+                    <p class='c_data_email'> Correo electr&oacute;nico </p>
+                    <div class='c_data_separator'></div>
+                  </div>
+                  <div class='c_data_content'>
+                    <p class='c_data_name'> Nombre de la persona </p>
+                    <p class='c_data_phone'> Tel&eacute;fono </p>
+                    <p class='c_data_email'> Correo electr&oacute;nico </p>
+                    <div class='c_data_separator'></div>
+                  </div>
+                  <div class='c_data_content last'>
+                    <p class='c_data_name'> Nombre de la persona </p>
+                    <p class='c_data_phone'> Tel&eacute;fono </p>
+                    <p class='c_data_email'> Correo electr&oacute;nico </p>
+                    <div class='c_data_separator'></div>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </form>
+          </div>
+        ";
+
+        // $section .= "
+        //   </div>
+        // ";
+      }
+
+      $block['subject'] = t(''); //This is Publicidad Block
+      $block['content'] = $section;
+
+    break;
+  }
+  return $block;
+}

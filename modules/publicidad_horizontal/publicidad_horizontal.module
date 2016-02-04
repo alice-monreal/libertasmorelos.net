@@ -26,7 +26,7 @@ function publicidad_horizontal_block_view($delta = '') {
 
       // Get current path
       $path = current_path();
-      if($path == "node/6" || $path == "node/12"){
+      if($path == "node/6" || $path == "node/12" || $path == "node/5"){
         $section = "
         <div class='publicidad_horizontal_container'>
           <p class='publicidad_horizontal_text'> Publicidad </p>

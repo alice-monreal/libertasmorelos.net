@@ -83,10 +83,12 @@ function publicidad_block_view($delta = '') {
                   <input class='p_email' type='text' name='p_email' />
                   <label class='p_phone_label'> Tel&eacute;fono </label>
                   <input class='p_phone' type='text' name='p_phone' />
+                  <label class='p_company_label'> Empresa </label>
+                  <input class='p_company' type='text' name='p_company' />
                 </div>
                 <div class='p_textarea_container'>
-                  <label class='messsage_label'> Mensaje </label>
-                  <textarea class='p_message' name='p_message' form='usrform'>Enter text here...</textarea>
+                  <label class='p_messsage_label'> Mensaje </label>
+                  <textarea class='p_message' name='p_message' form='usrform'></textarea>
                 </div>
 
                 <div class='p_checkbox_container'>
@@ -98,7 +100,7 @@ function publicidad_block_view($delta = '') {
                   <label for='pc3'><span></span> Paquete 3</label>
                 </div>
 
-                <input class='p_button' type='submit' value='Submit'>
+                <input class='p_button' type='submit' value='Enviar'>
               </div>
             </form>
           </div>

@@ -242,13 +242,13 @@
 		    height: 19px;
 		    margin: -1px 4px 0 0;
 		    vertical-align: middle;
-		    background: url("../../images/check_radio_sheet_2.png") left top no-repeat;
+		    background: url("../../images/check_radio_sheet.png") left top no-repeat;
 		    font-family: robotoCondesedLight, Helvetica, sans-serif !important;
 		    cursor:pointer;
 		}
 
 		input[type="checkbox"]:checked + label span{
-		    background: url("../../images/check_radio_sheet_2.png") -20px top no-repeat;
+		    background: url("../../images/check_radio_sheet.png") -20px top no-repeat;
 		}
 	}
 }

@@ -1,0 +1,292 @@
+/* line 4, ../sass/promotions.scss */
+.promo_container .promo_title {
+  font-family: robotoCondesedRegular, Helvetica, sans-serif;
+  font-size: 30px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  text-align: center;
+}
+/* line 11, ../sass/promotions.scss */
+.promo_container .promo_best {
+  position: relative;
+  width: 925px;
+  height: 440px;
+  margin: 0 auto;
+  background-image: url("../../images/FONDO-TRIANGULOS-PUBLICIDAD.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+/* line 20, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section {
+  position: absolute;
+}
+/* line 22, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section p {
+  font-family: robotoCondesedRegular, Helvetica, sans-serif;
+  font-size: 30px;
+  color: #1a1a1a;
+}
+/* line 28, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section .promo_best_description {
+  font-family: robotoCondesedLight, Helvetica, sans-serif;
+}
+/* line 31, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section .promo_best_price {
+  font-family: latoHeavy, Helvetica, sans-serif;
+}
+/* line 34, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section .promo_best_button {
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 37, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section .promo_best_button .promo_best_button_text {
+  font-family: latoHeavy, Helvetica, sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+}
+/* line 43, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 {
+  top: 50px;
+  left: 70px;
+  width: 400px;
+  height: 160px;
+}
+/* line 48, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 .promo_best_title {
+  font-size: 24px;
+}
+/* line 51, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 .promo_best_description {
+  font-size: 14px;
+}
+/* line 54, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 .promo_best_price {
+  font-size: 24px;
+  color: #1e5f7e;
+}
+/* line 58, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 .promo_best_button {
+  width: 170px;
+  height: 30px;
+  background-color: #1e5f7e;
+}
+/* line 62, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_1 .promo_best_button .promo_best_button_text {
+  padding: 2px 0 0;
+  font-size: 18px;
+}
+/* line 68, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 {
+  top: 160px;
+  right: 40px;
+  width: 210px;
+  height: 140px;
+}
+/* line 73, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 .promo_best_title {
+  font-size: 14px;
+}
+/* line 76, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 .promo_best_description {
+  font-size: 12px;
+}
+/* line 79, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 .promo_best_price {
+  font-size: 14px;
+  color: #4f7273;
+}
+/* line 83, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 .promo_best_button {
+  width: 120px;
+  height: 25px;
+  background-color: #5b8789;
+  cursor: pointer;
+}
+/* line 88, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_2 .promo_best_button .promo_best_button_text {
+  padding: 4px 0 0;
+  font-size: 11px;
+}
+/* line 94, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 {
+  width: 310px;
+  height: 130px;
+  top: 255px;
+  left: 50%;
+  margin: 0 0 0 -155px;
+  text-align: center;
+}
+/* line 101, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 .promo_best_title {
+  font-size: 18px;
+}
+/* line 104, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 .promo_best_description {
+  font-size: 14px;
+}
+/* line 107, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 .promo_best_price {
+  font-size: 18px;
+  color: #543d78;
+}
+/* line 111, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 .promo_best_button {
+  width: 125px;
+  height: 25px;
+  background-color: #543d78;
+}
+/* line 115, ../sass/promotions.scss */
+.promo_container .promo_best .promo_best_section#pbs_3 .promo_best_button .promo_best_button_text {
+  padding: 4px 0 0;
+  font-size: 12px;
+}
+
+/* line 126, ../sass/promotions.scss */
+.promo_more {
+  position: relative;
+  float: left;
+  width: 200px;
+  max-height: 200px;
+  margin: 80px 20px 0;
+  text-align: center;
+}
+/* line 133, ../sass/promotions.scss */
+.promo_more p {
+  margin: 0;
+  color: #323034;
+}
+/* line 137, ../sass/promotions.scss */
+.promo_more .promo_more_precio {
+  font-family: latoHeavy, Helvetica, sans-serif;
+  font-size: 18px;
+}
+/* line 141, ../sass/promotions.scss */
+.promo_more .promo_more_title {
+  margin: 5px 0 0;
+  font-family: latoMedium, Helvetica, sans-serif;
+  font-size: 14px;
+}
+/* line 146, ../sass/promotions.scss */
+.promo_more .promo_more_description {
+  margin: 15px 0 0;
+  font-family: latoRegular, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+/* line 153, ../sass/promotions.scss */
+.p_container {
+  clear: both;
+  margin: 0;
+  padding: 80px 0 0 40px;
+}
+/* line 157, ../sass/promotions.scss */
+.p_container .p_title {
+  font-family: robotoCondesedRegular, Helvetica, sans-serif;
+  font-size: 24px;
+  color: #353333;
+}
+/* line 162, ../sass/promotions.scss */
+.p_container .p_description {
+  margin: 25px 0 0;
+  font-family: robotoCondesedLight, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #1a1a1a;
+}
+/* line 170, ../sass/promotions.scss */
+.p_container form.promo_form label {
+  font-family: robotoCondesedLight, Helvetica, sans-serif !important;
+  font-size: 14px;
+  font-weight: normal !important;
+}
+/* line 175, ../sass/promotions.scss */
+.p_container form.promo_form input, .p_container form.promo_form textarea {
+  font-family: robotoCondesedRegular, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  background-color: #dcdcd9;
+  border: none;
+  color: #413e3e;
+}
+/* line 183, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container {
+  width: 730px;
+  height: 340px;
+  margin: 0;
+}
+/* line 187, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_input_container {
+  float: left;
+  width: 220px;
+  height: 260px;
+  margin: 30px 0 0;
+}
+/* line 192, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_input_container label {
+  font-size: 18px !important;
+  color: #1a1a1a;
+}
+/* line 196, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_input_container input {
+  width: 210px;
+  height: 35px;
+}
+/* line 201, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_textarea_container {
+  float: left;
+  width: 455px;
+  height: 160px;
+  margin: 30px 0 0 50px;
+}
+/* line 206, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_textarea_container label {
+  font-size: 18px !important;
+}
+/* line 209, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_textarea_container textarea {
+  width: 450px;
+  height: 135px;
+}
+/* line 214, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_checkbox_container {
+  float: left;
+  width: 455px;
+  min-height: 50px;
+  margin: 15px 0 0 50px;
+}
+/* line 219, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_checkbox_container label {
+  float: left;
+  margin: 15px 20px 0 0;
+}
+/* line 224, ../sass/promotions.scss */
+.p_container form.promo_form .p_form_container .p_button {
+  float: right;
+  width: 120px;
+  height: 30px;
+  margin: 25px 0 0;
+  background-color: #413e3e;
+  border-radius: 15px;
+  font-size: 18px;
+  font-family: robotoCondesedRegular, Helvetica, sans-serif !important;
+  color: #fff;
+}
+/* line 237, ../sass/promotions.scss */
+.p_container form.promo_form input[type="checkbox"] {
+  display: none;
+}
+/* line 239, ../sass/promotions.scss */
+.p_container form.promo_form input[type="checkbox"] + label span {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  background: url("../../images/check_radio_sheet_2.png") left top no-repeat;
+  font-family: robotoCondesedLight, Helvetica, sans-serif !important;
+  cursor: pointer;
+}
+/* line 250, ../sass/promotions.scss */
+.p_container form.promo_form input[type="checkbox"]:checked + label span {
+  background: url("../../images/check_radio_sheet_2.png") -20px top no-repeat;
+}

@@ -22,9 +22,9 @@ function list_section_block_view($delta = '') {
     case 'list':
       Global $base_url;
 
-      $section = "<div> <p style='color:red;'> Hola Mundo </p> </div>";
+      $section = "<div> <p style='color:black;'> Agregue una lista por secci&oacute;n </p> </div>";
 
-      $block['subject'] = t(''); //This is my deportes Articles Slider Block
+      $block['subject'] = t(''); //This is List Block
       $block['content'] = $section;
 
     break;
@@ -140,4 +140,70 @@ function alice_test($list_type=18, $index=0){
     
     $result = array('items' => $items, 'index' => $index, 'type' => $type);
     return $result;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function my_module_menu() {
+  $items['ajax/remote'] = array(
+    'title' => 'Data',
+    'page callback' => 'my_module_remote_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['page'] = array(
+    'title' => 'Data',
+    'page callback' => 'my_module_remote',
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Menu callback.
+ *
+ * Output the page with the container to load AJAX content to.
+ */
+function my_module_remote() {
+  $wrapper = array();
+  $wrapper['#attached']['js'] = array(
+    drupal_get_path('module', 'submit_ajax') . '/submit_ajax.js'
+  );
+  $wrapper['#attached']['library'] = array(
+    array('system', 'drupal.ajax')
+  );
+  $wrapper['container'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => 'remote-content-wrapper',
+      'title' => t('click to reload')
+    )
+  );
+  $wrapper['container']['content'] = array(
+    '#markup' => t('Loading data...')
+  );
+  return $wrapper;
+}
+
+/**
+ * Ajax callback.
+ *
+ * Load remote information.
+ */
+function my_module_remote_ajax() {
+
+  $commands = array();
+
+  $selector = '#remote-content-wrapper';
+  $html = my_module_function_to_request_data_form_remote_server_and_build_html();
+  // Debug messages, we can use dpm() here.
+  $messages = theme('status_messages');
+  $commands[] = ajax_command_prepend('body', $messages);
+  // Add command with insert new requested content
+  $commands[] = ajax_command_html($selector, $html);
+
+  print ajax_render($commands);
+  drupal_exit();
 }

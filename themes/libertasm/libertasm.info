@@ -14,6 +14,7 @@ stylesheets[all][] = libertasm/stylesheets/fonts.css
 stylesheets[all][] = libertasm/stylesheets/main.css
 stylesheets[all][] = libertasm/stylesheets/article.css
 stylesheets[all][] = libertasm/stylesheets/list.css
+stylesheets[all][] = libertasm/stylesheets/promotions.css
 stylesheets[all][] = plugins/slick-1.5.9/slick/slick.css
 stylesheets[all][] = plugins/slick-1.5.9/slick/slick-theme.css
 stylesheets[all][] = plugins/fancybox/source/jquery.fancybox.css
@@ -22,6 +23,7 @@ stylesheets[all][] = plugins/fancybox/source/helpers/jquery.fancybox-buttons.css
 
 scripts[] = plugins/slick-1.5.9/slick/slick.min.js
 scripts[] = js/main.js
+scripts[] = js/my_module_ajax.js
 scripts[] = plugins/fancybox/source/jquery.fancybox.pack.js
 scripts[] = plugins/fancybox/source/helpers/jquery.fancybox-thumbs.js
 scripts[] = plugins/fancybox/source/helpers/jquery.fancybox-buttons.js

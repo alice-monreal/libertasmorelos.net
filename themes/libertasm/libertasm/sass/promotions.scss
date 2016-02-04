@@ -1,0 +1,255 @@
+
+.promo_container{
+
+	.promo_title{
+		font-family: robotoCondesedRegular, Helvetica, sans-serif;
+	    font-size: 30px;
+	    color: #1a1a1a;
+	    text-transform: uppercase;
+	    text-align: center;
+	}
+	.promo_best{
+		position: relative;
+	    width: 925px;
+	    height: 440px;
+	    margin: 0 auto;
+    	background-image: url("../../images/FONDO-TRIANGULOS-PUBLICIDAD.png");
+		background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: center;
+		.promo_best_section{
+			position: absolute;
+			p{
+				font-family: robotoCondesedRegular, Helvetica, sans-serif;
+			    font-size: 30px;
+			    color: #1a1a1a;
+			}
+			.promo_best_title{}
+			.promo_best_description{
+				font-family: robotoCondesedLight, Helvetica, sans-serif;
+			}
+			.promo_best_price{
+				font-family: latoHeavy, Helvetica, sans-serif;	
+			}
+			.promo_best_button{
+				margin: 0 auto;
+				text-align: center;
+				.promo_best_button_text{
+					font-family: latoHeavy, Helvetica, sans-serif;
+					color: #fff;
+					text-transform: uppercase;
+				}
+			}
+			&#pbs_1{
+			    top: 50px;
+			    left: 70px;
+			    width: 400px;
+			    height: 160px;
+				.promo_best_title{
+					font-size: 24px;
+				}
+				.promo_best_description{
+					font-size: 14px;
+				}
+				.promo_best_price{
+					font-size: 24px;
+					color: #1e5f7e;
+				}
+				.promo_best_button{
+					width: 170px;
+					height: 30px;
+					background-color: #1e5f7e;
+					.promo_best_button_text{
+						padding: 2px 0 0;
+						font-size: 18px;
+					}
+				}
+			}
+			&#pbs_2{
+				top: 160px;
+			    right: 40px;
+		        width: 210px;
+				height: 140px;
+				.promo_best_title{
+					font-size: 14px;
+				}
+				.promo_best_description{
+					font-size: 12px;
+				}
+				.promo_best_price{
+					font-size: 14px;
+					color: #4f7273;
+				}
+				.promo_best_button{
+					width: 120px;
+					height: 25px;
+					background-color: #5b8789;
+					cursor: pointer;
+					.promo_best_button_text{
+						padding: 4px 0 0;
+						font-size: 11px;
+					}
+				}
+			}
+			&#pbs_3{
+				width: 310px;
+			    height: 130px;
+				top: 255px;
+			    left: 50%;
+			    margin: 0 0 0 -155px;
+			    text-align: center;
+				.promo_best_title{
+					font-size: 18px;
+				}
+				.promo_best_description{
+					font-size: 14px;
+				}
+				.promo_best_price{
+					font-size: 18px;
+					color: #543d78;
+				}
+				.promo_best_button{
+					width: 125px;
+					height: 25px;
+					background-color: #543d78;
+					.promo_best_button_text{
+						padding: 4px 0 0;
+						font-size: 12px;
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+.promo_more{
+	position: relative;
+	float: left;
+	width: 200px;
+	max-height: 200px;
+	margin: 80px 20px 0;
+	text-align: center;
+	p{
+		margin: 0;
+		color: #323034;
+	}
+	.promo_more_precio{
+		font-family: latoHeavy, Helvetica, sans-serif;
+		font-size: 18px;
+	}
+	.promo_more_title{
+		margin: 5px 0 0;
+		font-family: latoMedium, Helvetica, sans-serif;
+		font-size: 14px;
+	}
+	.promo_more_description{
+		margin: 15px 0 0;
+		font-family: latoRegular, Helvetica, sans-serif;
+		font-size: 14px;
+	}	
+}
+
+.p_container{
+	clear: both;
+    margin: 0;
+    padding: 80px 0 0 40px;
+	.p_title{
+		font-family: robotoCondesedRegular, Helvetica, sans-serif;
+	    font-size: 24px;
+	    color: #353333;
+	}
+	.p_description{
+	    margin: 25px 0 0;
+		font-family: robotoCondesedLight, Helvetica, sans-serif;
+	    font-size: 18px;
+	    color: #1a1a1a;
+	}
+
+	form.promo_form{
+		label{
+			font-family: robotoCondesedLight, Helvetica, sans-serif !important;
+		    font-size: 14px;
+		    font-weight: normal !important;
+		}
+		input, textarea{
+			font-family: robotoCondesedRegular, Helvetica, sans-serif !important;
+			font-size: 16px !important;
+			background-color: #dcdcd9;
+	    	border: none;
+	    	color: #413e3e;
+		}
+
+		.p_form_container{
+			width: 730px;
+		    height: 340px;
+		    margin: 0;
+		    .p_input_container{
+		    	float: left;
+			    width: 220px;
+			    height: 260px;
+			    margin: 30px 0 0;
+			    label{
+			    	font-size: 18px !important;
+			    	color: #1a1a1a;
+			    }
+			    input{
+			    	width: 210px;
+    				height: 35px;
+			    }
+		    }
+		    .p_textarea_container{
+		    	float: left;
+			    width: 455px;
+			    height: 160px;
+			    margin: 30px 0 0 50px;
+			    label{
+			    	font-size: 18px !important;
+			    }
+			    textarea{
+			    	width: 450px;
+    				height: 135px;
+			    }
+		    }
+		    .p_checkbox_container{
+		    	float: left;
+			    width: 455px;
+			    min-height: 50px;
+			    margin: 15px 0 0 50px;
+			    label{
+				    float: left;
+		    		margin: 15px 20px 0 0;
+			    }
+		    }
+		    .p_button{
+			    float: right;
+			    width: 120px;
+			    height: 30px;
+			    margin: 25px 0 0;
+			    background-color: #413e3e;
+			    border-radius: 15px;
+			    font-size: 18px;
+			    font-family: robotoCondesedRegular, Helvetica, sans-serif !important;
+			    color: #fff;
+		    }
+		}
+
+		input[type="checkbox"]{ display: none; }
+	 
+		input[type="checkbox"] + label span{
+		    display: inline-block;
+		    width: 19px;
+		    height: 19px;
+		    margin: -1px 4px 0 0;
+		    vertical-align: middle;
+		    background: url("../../images/check_radio_sheet_2.png") left top no-repeat;
+		    font-family: robotoCondesedLight, Helvetica, sans-serif !important;
+		    cursor:pointer;
+		}
+
+		input[type="checkbox"]:checked + label span{
+		    background: url("../../images/check_radio_sheet_2.png") -20px top no-repeat;
+		}
+	}
+}
+

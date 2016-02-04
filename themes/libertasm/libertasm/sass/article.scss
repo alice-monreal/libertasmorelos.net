@@ -103,7 +103,7 @@
 			font-size: 30px;
 		}
 		&.ac_author_date{
-			margin: 0 15px 0 30px;
+			margin: 3px 15px 0 30px;
 			font-family: robotoLightItalic, Helvetica, sans-serif;
 			font-size: 14px;
 		}
@@ -141,7 +141,7 @@
 	clear: both;
 	width: 100%;
 	min-height: 50px;
-	margin: 25px 0 0; 
+	margin: 50px 0 0; 
 	background-color: #fff;
 	p {
 		font-family: robotoCondesedLight, Helvetica, sans-serif;
@@ -157,11 +157,11 @@
 	clear: both;
 	width: 100%;
 	min-height: 50px;
-	margin: 25px 0 0; 
-	padding: 25px 0;
+	margin: 60px 0 0; 
+	padding: 15px 0;
 	background-color: #ececeb;
 	p {
-		margin: 0 30px 30px;
+		margin: 0 30px 15px;
 		/*padding: 25px 0 0;*/
 		font-family: robotoCondesedLight, Helvetica, sans-serif;
 		font-size: 24px;
@@ -179,9 +179,9 @@
 	display: block;
 	position: relative;
 	clear: both;
-	width: 100%;
+	width: 750px;
 	min-height: 50px;
-	margin: 25px 0 0; 
+	margin: 65px auto 0; 
 	background-color: #ececeb;
 	p {
 	    margin: 0 0 0 30px;
@@ -231,7 +231,7 @@
 		padding: 10px 0 0 10px;
 	}
 	&.last{
-		padding: 15px 10px 0 0;
+		padding: 8px 10px 0 0;
 	}
 }
 

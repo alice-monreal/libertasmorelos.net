@@ -555,6 +555,9 @@
                 <p> Miscelanea </p>
               </div>
               <div class='lista_container'>
+                <div class="lista_adds">
+                  <p> Publicidad </p>
+                </div>
 
           <?php
             foreach ($test['items'] as $t) {
@@ -575,7 +578,7 @@
             }
             // print_r($page['content']['list_section_list']['#markup']);
             ?>
-                <a class='lista_content_see_more' href='http://libertasmorelos.lo/node/'> ver m&aacute;s... </a>
+                <p id="remote-content-wrapper" class='lista_content_see_more'> ver m&aacute;s... </p>
               </div>
             </div>
 

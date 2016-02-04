@@ -37,6 +37,10 @@
 }
 /* Lato */
 @font-face {
+  font-family: latoHeavy;
+  src: url(../../fonts/lato/Lato-Heavy.ttf);
+}
+@font-face {
   font-family: latoBlack;
   src: url(../../fonts/lato/Lato-Black.ttf);
 }

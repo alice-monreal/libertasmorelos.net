@@ -66,30 +66,30 @@ jQuery( document ).ready(function( $ ) {
 	});
 
 	// Lista.
-	var service_url = '/node/47?alice_test';
-	$(".lista_content_see_more").click(function(){
-		console.debug('enter here alice!');
-		$.ajax({
-            cache: false,
-            data: '',
-            dataType: 'json',
-            type: 'post',
-            success: function(data) {
-                if (data.status == 'ok') {
-                    // $('#sxc_email_review').text($sxc_email.val());
-                    // $('.first-step').fadeOut(300, function() {
-                    //     $('.second-step').removeClass('hidden').hide().fadeIn();
-                    // });
-					alert('alice!');
-                } else {
-                    // $('#sxc_send').removeAttr(disabled).animate({
-                    //     opacity: '1'
-                    // });
-                    alert(data.message);
-                }
-            },
-            url: service_url
-        });
-	});
+	// var service_url = '/node/47?alice_test';
+	// $(".lista_content_see_more").click(function(){
+	// 	console.debug('enter here alice!');
+	// 	$.ajax({
+ //            cache: false,
+ //            data: '',
+ //            dataType: 'json',
+ //            type: 'post',
+ //            success: function(data) {
+ //                if (data.status == 'ok') {
+ //                    // $('#sxc_email_review').text($sxc_email.val());
+ //                    // $('.first-step').fadeOut(300, function() {
+ //                    //     $('.second-step').removeClass('hidden').hide().fadeIn();
+ //                    // });
+	// 				alert('alice!');
+ //                } else {
+ //                    // $('#sxc_send').removeAttr(disabled).animate({
+ //                    //     opacity: '1'
+ //                    // });
+ //                    alert(data.message);
+ //                }
+ //            },
+ //            url: service_url
+ //        });
+	// });
 
 });

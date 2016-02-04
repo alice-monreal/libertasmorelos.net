@@ -118,7 +118,7 @@
 }
 /* line 105, ../sass/article.scss */
 .article_container p.ac_author_date {
-  margin: 0 15px 0 30px;
+  margin: 3px 15px 0 30px;
   font-family: robotoLightItalic, Helvetica, sans-serif;
   font-size: 14px;
 }
@@ -158,7 +158,7 @@
   clear: both;
   width: 100%;
   min-height: 50px;
-  margin: 25px 0 0;
+  margin: 50px 0 0;
   background-color: #fff;
 }
 /* line 146, ../sass/article.scss */
@@ -176,13 +176,13 @@
   clear: both;
   width: 100%;
   min-height: 50px;
-  margin: 25px 0 0;
-  padding: 25px 0;
+  margin: 60px 0 0;
+  padding: 15px 0;
   background-color: #ececeb;
 }
 /* line 163, ../sass/article.scss */
 .article_releated_notes p {
-  margin: 0 30px 30px;
+  margin: 0 30px 15px;
   /*padding: 25px 0 0;*/
   font-family: robotoCondesedLight, Helvetica, sans-serif;
   font-size: 24px;
@@ -201,9 +201,9 @@
   display: block;
   position: relative;
   clear: both;
-  width: 100%;
+  width: 750px;
   min-height: 50px;
-  margin: 25px 0 0;
+  margin: 65px auto 0;
   background-color: #ececeb;
 }
 /* line 186, ../sass/article.scss */
@@ -264,7 +264,7 @@
 }
 /* line 233, ../sass/article.scss */
 .article_social_buttons .item-list ul li.last {
-  padding: 15px 10px 0 0;
+  padding: 8px 10px 0 0;
 }
 
 /* line 238, ../sass/article.scss */

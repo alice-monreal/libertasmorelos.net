@@ -1,0 +1,118 @@
+<?php
+
+/**
+ *@file
+ *publicidad.module
+ *
+ */
+function publicidad_block_info(){
+  // This example comes from node.module.
+  $blocks['publicidad'] = array(
+    'info' => t('Publicidad Section'),
+  );
+
+  return $blocks;
+}
+
+function publicidad_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'publicidad':
+      Global $base_url;
+
+      $section = "";
+
+      // Get current path
+      $path = current_path();
+      if($path == "node/12"){
+
+        $section = "
+          <div class='promo_container'>
+            <p class='promo_title'> Conoce nuestras promociones </p>
+            <div class='promo_best'>
+              <div class='promo_best_section' id='pbs_1'> 
+                <p class='promo_best_title'> T&iacute;tulo </p>
+                <p class='promo_best_description'> Descripci&oacute;n </p>
+                <p class='promo_best_price'> Precio </p>
+                <div class='promo_best_button'>
+                  <p class='promo_best_button_text'> Comenzar </p>
+                </div>
+              </div>
+              <div class='promo_best_section' id='pbs_2'> 
+                <p class='promo_best_title'> T&iacute;tulo </p>
+                <p class='promo_best_description'> Descripci&oacute;n </p>
+                <p class='promo_best_price'> Precio </p>
+                <div class='promo_best_button'>
+                  <p class='promo_best_button_text'> Comenzar </p>
+                </div>
+              </div>
+              <div class='promo_best_section' id='pbs_3'> 
+                <p class='promo_best_title'> T&iacute;tulo </p>
+                <p class='promo_best_description'> Descripci&oacute;n </p>
+                <p class='promo_best_price'> Precio </p>
+                <div class='promo_best_button'>
+                  <p class='promo_best_button_text'> Comenzar </p>
+                </div>
+              </div>
+            </div>
+        ";
+        for ($i=0; $i < 4; $i++) { 
+          
+          $section .= "
+              <div class='promo_more'>
+                <p class='promo_more_precio'> Precio </p>
+                <p class='promo_more_title'> T&iacute;tulo </p>
+                <p class='promo_more_description'> Descripci&oacute;n </p>
+              </div>
+          ";
+        }
+
+        $section .= "
+          <div class='p_container'>
+            <p class='p_title'> Paquete personalizado </p>
+            <p class='p_description'> Solicita tu paquete </p>          
+
+            <form class='promo_form'>
+              <div class='p_form_container'>
+                <div class='p_input_container'>
+                  <label class='p_name_label'> Nombre </label>
+                  <input class='p_name' type='text' name='p_name' />
+                  <label class='p_email_label'> Correo Electr&oacute;nico </label>
+                  <input class='p_email' type='text' name='p_email' />
+                  <label class='p_phone_label'> Tel&eacute;fono </label>
+                  <input class='p_phone' type='text' name='p_phone' />
+                </div>
+                <div class='p_textarea_container'>
+                  <label class='messsage_label'> Mensaje </label>
+                  <textarea class='p_message' name='p_message' form='usrform'>Enter text here...</textarea>
+                </div>
+
+                <div class='p_checkbox_container'>
+                  <input class='p_paquete' type='checkbox' id='pc1' name='p_paquete'>
+                  <label for='pc1'><span></span> Paquete 1</label>
+                  <input class='p_paquete' type='checkbox' id='pc2' name='p_paquete'>
+                  <label for='pc2'><span></span> Paquete 2</label>
+                  <input class='p_paquete' type='checkbox' id='pc3' name='p_paquete'>
+                  <label for='pc3'><span></span> Paquete 3</label>
+                </div>
+
+                <input class='p_button' type='submit' value='Submit'>
+              </div>
+            </form>
+          </div>
+        ";
+
+        $section .= "
+          </div>
+        ";
+      }
+
+      $block['subject'] = t(''); //This is Publicidad Block
+      $block['content'] = $section;
+
+    break;
+  }
+  return $block;
+}

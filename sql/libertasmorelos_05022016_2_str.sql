@@ -11,7 +11,7 @@
  Target Server Version : 50538
  File Encoding         : utf-8
 
- Date: 02/05/2016 14:46:46 PM
+ Date: 02/05/2016 14:52:38 PM
 */
 
 SET NAMES utf8;
@@ -3316,5 +3316,5 @@ CREATE TABLE `watchdog` (
   PRIMARY KEY (`wid`),
   KEY `type` (`type`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=309449 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
+) ENGINE=InnoDB AUTO_INCREMENT=309838 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
 

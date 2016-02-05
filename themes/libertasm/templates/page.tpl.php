@@ -307,15 +307,16 @@
             '11' => 'Noviembre',  '12' => 'Diciembre' );
 
           $date = $post_date;
+
           for($i=0; $i<2; $i++){
-            $day   = substr($date, 0, 2);
-            $month = substr($date, 3, 2);
-            $year  = substr($date, 6, 4);
             if($i === 0){
-              $dateformat = $month.'/'.$day.'/'.$year;
+              $dateformat = $date;
               $time = strtotime($dateformat);
-              $date = date('d-m-Y-D', $time);
+              $date = date('m-d-Y-D', $time);
             }else{
+              $month   = substr($date, 0, 2);
+              $day = substr($date, 3, 2);
+              $year  = substr($date, 6, 4);
               $nday  = substr($date, 11, 3);
               $dateformat = $days[$nday].' '.$day.' de '.$months[$month].' de '.$year;
             }                
@@ -449,15 +450,16 @@
             '11' => 'Noviembre',  '12' => 'Diciembre' );
 
           $date = $post_date;
+
           for($i=0; $i<2; $i++){
-            $day   = substr($date, 0, 2);
-            $month = substr($date, 3, 2);
-            $year  = substr($date, 6, 4);
             if($i === 0){
-              $dateformat = $month.'/'.$day.'/'.$year;
+              $dateformat = $date;
               $time = strtotime($dateformat);
-              $date = date('d-m-Y-D', $time);
+              $date = date('m-d-Y-D', $time);
             }else{
+              $month   = substr($date, 0, 2);
+              $day = substr($date, 3, 2);
+              $year  = substr($date, 6, 4);
               $nday  = substr($date, 11, 3);
               $dateformat = $days[$nday].' '.$day.' de '.$months[$month].' de '.$year;
             }                
@@ -542,13 +544,11 @@
           $index = 0;
           $list_type = $content['body']['#object']->field_section['und'][0]['value'];
 
-          $test = alice_test($list_type, $index);
-          // print_r('test: ');
-          // print_r($test);
-          // print render($page['content']['list_section_list']['#markup']);
+          $list = load_list($list_type, $index);
 
+          // print render($page['content']['list_section_list']['#markup']);
           ?>
-            <p class="list_title"> Noticias <?php echo $test['type'][0]->title ?> </p>
+            <p class="list_title"> Noticias <?php echo $list['type'][0]->title ?> </p>
 
             <div class='lista_section'>
               <div class='lista_title'> 
@@ -560,7 +560,7 @@
                 </div>
 
           <?php
-            foreach ($test['items'] as $t) {
+            foreach ($list['items'] as $t) {
               if($t->title != ""){
               ?>
                 <a href='http://libertasmorelos.lo/node/<?php echo $t->id ?>'>
@@ -576,8 +576,7 @@
               <?php
               }
             }
-            // print_r($page['content']['list_section_list']['#markup']);
-            ?>
+          ?>
                 <p id="remote-content-wrapper" class='lista_content_see_more'> ver m&aacute;s... </p>
               </div>
             </div>

@@ -65,31 +65,18 @@ jQuery( document ).ready(function( $ ) {
 		}
 	});
 
-	// Lista.
-	// var service_url = '/node/47?alice_test';
-	// $(".lista_content_see_more").click(function(){
-	// 	console.debug('enter here alice!');
-	// 	$.ajax({
- //            cache: false,
- //            data: '',
- //            dataType: 'json',
- //            type: 'post',
- //            success: function(data) {
- //                if (data.status == 'ok') {
- //                    // $('#sxc_email_review').text($sxc_email.val());
- //                    // $('.first-step').fadeOut(300, function() {
- //                    //     $('.second-step').removeClass('hidden').hide().fadeIn();
- //                    // });
-	// 				alert('alice!');
- //                } else {
- //                    // $('#sxc_send').removeAttr(disabled).animate({
- //                    //     opacity: '1'
- //                    // });
- //                    alert(data.message);
- //                }
- //            },
- //            url: service_url
- //        });
+ //  	$.datepicker.setDefaults({
+	//   showOn: "both",
+	//   buttonImageOnly: true,
+	//   buttonImage: "calendar.gif",
+	//   buttonText: "Calendar"
 	// });
+
+  	console.debug('edit: ', $("#edit-field-date-und-0-value"));
+	$("#edit-field-date-und-0-value").datepicker({
+		inline: true
+	});
+
+	$("#edit-field-type-und-0-value, #edit-field-visited-und-0-value, #edit-field-approved-und-0-value, #edit-field-cancel-und-0-value").attr('disabled','disabled');
 
 });

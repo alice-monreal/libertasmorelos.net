@@ -32,7 +32,7 @@ function list_section_block_view($delta = '') {
   return $block;
 }
 
-function alice_test($list_type=18, $index=0){
+function load_list($list_type=18, $index=0){
 
     // Validate next bounch of articles.
     if($index>0){
@@ -54,8 +54,6 @@ function alice_test($list_type=18, $index=0){
     
     $a_length = sizeof($articles);
     $index = $articles[$a_length-1]->nid;
-
-
 
     for($i = 0; $i < 10; $i++){
       if($articles[$i]->nid){
@@ -125,85 +123,13 @@ function alice_test($list_type=18, $index=0){
       $items[$i]->description = $description;
     }
 
-
-
     //Get title text.
     $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, A.title
               FROM {node} A
               WHERE A.nid = :id AND A.type = :type 
               ORDER BY A.nid DESC LIMIT 10";
     $type = db_query($query, array(':type' => 'clasificacion_de_articulos', ':id' => $list_type))->fetchAll();
-    // print_r('type:  ');
-    // print_r($type);
-
-    // $type = '';
     
     $result = array('items' => $items, 'index' => $index, 'type' => $type);
     return $result;
-}
-
-/**
- * Implements hook_menu().
- */
-function my_module_menu() {
-  $items['ajax/remote'] = array(
-    'title' => 'Data',
-    'page callback' => 'my_module_remote_ajax',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['page'] = array(
-    'title' => 'Data',
-    'page callback' => 'my_module_remote',
-    'access arguments' => array('access content'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  return $items;
-}
-
-/**
- * Menu callback.
- *
- * Output the page with the container to load AJAX content to.
- */
-function my_module_remote() {
-  $wrapper = array();
-  $wrapper['#attached']['js'] = array(
-    drupal_get_path('module', 'submit_ajax') . '/submit_ajax.js'
-  );
-  $wrapper['#attached']['library'] = array(
-    array('system', 'drupal.ajax')
-  );
-  $wrapper['container'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'id' => 'remote-content-wrapper',
-      'title' => t('click to reload')
-    )
-  );
-  $wrapper['container']['content'] = array(
-    '#markup' => t('Loading data...')
-  );
-  return $wrapper;
-}
-
-/**
- * Ajax callback.
- *
- * Load remote information.
- */
-function my_module_remote_ajax() {
-
-  $commands = array();
-
-  $selector = '#remote-content-wrapper';
-  $html = my_module_function_to_request_data_form_remote_server_and_build_html();
-  // Debug messages, we can use dpm() here.
-  $messages = theme('status_messages');
-  $commands[] = ajax_command_prepend('body', $messages);
-  // Add command with insert new requested content
-  $commands[] = ajax_command_html($selector, $html);
-
-  print ajax_render($commands);
-  drupal_exit();
 }

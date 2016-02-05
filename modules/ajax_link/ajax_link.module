@@ -1,0 +1,116 @@
+<?php 
+
+/**
+ * Implements hook_menu().
+ */
+function ajax_link_menu() {
+  $items = array();
+ 
+  $items['node/47'] = array(
+    'title' => 'Ajax Test',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'ajax_link_page',
+    'access arguments' => array('access content'),
+  );
+ 
+  $items['my-ajax-test/%'] = array(
+    'title' => 'Ajax test callback',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'ajax_link_callback',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
+ 
+  return $items;
+}
+
+/**
+ * Ajax callback to display the current time.
+ */
+function ajax_link_callback($ajax) {
+  // Do any database queries, processing, etc.
+  // $time = t('The current time is: !time', array('!time' => date('Y-m-d H:i:s')));
+	$data = call_list();
+	// $data = '<div style="background-color:pink;">Hola Alice <div>'; // $data['items'][0]->image_url
+	$time = t('The current time is: !time', array('!time' => $data));
+	$time = $data;
+	// print_r($time);
+ 
+  if ($ajax == 'ajax') {
+    $commands = array();
+    // Ajax command to replace the #ajax-display element with the current time.
+    $commands[] = ajax_command_replace('#ajax-display', "<div id='ajax-display'>" . $time . "</div>");
+    // Add a visual "changed" marker to the '#ajax-display' element.
+    $commands[] = ajax_command_changed('#ajax-display');
+    // Trigger our ajax_link jQuery plugin.
+    $commands[] = ajax_command_invoke(NULL, "ajax_link");
+ 
+    // Menu 'page callback' and #ajax['callback'] functions are supposed to
+    // return render arrays. If returning an Ajax commands array, it must be
+    // encapsulated in a render array structure.
+    ajax_deliver(array('#type' => 'ajax', '#commands' => $commands));
+  }
+  else {
+    // No ajax, just display the time on a page using renderable array.
+    return array(
+      '#markup' => $time,
+    );
+  }
+ }
+
+/**
+ * Callback function that displays a simple Ajax powered link.
+ */
+function ajax_link_page() {
+  return array(
+    '#type' => 'link',
+    '#title' => t('Ajax Link'),
+    '#href' => 'my-ajax-test/nojs',
+    '#prefix' => '<div id="ajax-link">',
+    '#suffix' => '</div><div id="ajax-display"></div>',
+    '#ajax' => array(
+      'effect' => 'fade',
+    ),
+  );
+}
+
+function call_list($list_type=23, $index=0){
+
+	$call = load_list($list_type, $index);
+	// print_r($call);
+
+	// $list = "
+	// 	<p class="list_title"> Noticias ".$call['type'][0]->title." </p>
+
+ //            <div class='lista_section'>
+ //              <div class='lista_title'> 
+ //                <p> Miscelanea </p>
+ //              </div>
+ //              <div class='lista_container'>
+ //                <div class='lista_adds'>
+ //                  <p> Publicidad </p>
+ //                </div>
+	// ";
+	$list = "";
+	$list = "<div class='lista_section'>
+				<div class='lista_container'>";
+
+    foreach ($call['items'] as $t) {
+      if($t->title != ""){
+      	$list .= "
+      		<a href='http://libertasmorelos.lo/node/".$t->id."'>
+	          <div class='lista_content ".$t->title."'>
+	            <div class='lista_content_image' style='background-image: url(".$t->image_url.");'> </div>
+	            <div class='lista_content_info'>
+	              <p class='lista_content_title'>".$t->title."</p>              
+	              <p class='lista_content_description'>".$t->description."</p>
+	            </div>
+	          </div>
+	        </a>   
+      	";
+      }
+    }
+          
+    $list .= '</div></div>';
+    return $list;
+}

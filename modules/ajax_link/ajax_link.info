@@ -1,0 +1,3 @@
+name = "Ajax Test"
+description = "A simple Ajax link example"
+core = 7.x

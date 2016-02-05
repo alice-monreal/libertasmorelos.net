@@ -76,6 +76,8 @@ function ajax_link_page() {
 
 function call_list($list_type=23, $index=0){
 
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
+
 	$call = load_list($list_type, $index);
 	// print_r($call);
 
@@ -98,7 +100,7 @@ function call_list($list_type=23, $index=0){
     foreach ($call['items'] as $t) {
       if($t->title != ""){
       	$list .= "
-      		<a href='http://libertasmorelos.lo/node/".$t->id."'>
+      		<a href='".$url_site."/node/".$t->id."'>
 	          <div class='lista_content ".$t->title."'>
 	            <div class='lista_content_image' style='background-image: url(".$t->image_url.");'> </div>
 	            <div class='lista_content_info'>

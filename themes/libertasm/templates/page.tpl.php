@@ -84,6 +84,8 @@
  * @see template_process()
  * @see bartik_process_page()
  */
+
+$url_site = "http://".$_SERVER['HTTP_HOST'];
 ?>
 
 
@@ -126,9 +128,9 @@
     <?php endif; ?>
 
     <div class="social-networks">
-      <span class="social-network facebook"> </span>
-      <span class="social-network twitter">  </span>
-      <span class="social-network youtube">  </span>
+      <a href="https://www.facebook.com/Libertas-Morelos-Peri%C3%B3dico-Digital-595683207250533/" target="_blank"><span class="social-network facebook"> </span> </a>
+      <a href="https://twitter.com/LibertasMor" target="_blank"><span class="social-network twitter">  </span> </a>
+      <a href="https://www.youtube.com/channel/UCPJQZub3tq4HzgoMnLGm-yw" target="_blank"><span class="social-network youtube">  </span></a>
     </div>
 
     <!-- <?php print_r ($main_menu); ?> -->
@@ -151,6 +153,46 @@
             ),
           )); ?>
         </div> <!-- /#main-menu -->
+      </div>
+
+      <?php
+        // Date Format
+          $days = array(
+                'Mon' => 'Lunes',
+                'Tue' => 'Martes',
+                'Wed' => 'Mi&eacute;rcoles',
+                'Thu' => 'Jueves',
+                'Fri' => 'Viernes',
+                'Sat' => 'S&aacute;bado',  
+                'Sun' => 'Domingo' );
+              
+          $months = array(
+            '01' => 'Enero',      '02' => 'Febrero',
+            '03' => 'Marzo',      '04' => 'Abril',
+            '05' => 'Mayo',       '06' => 'Junio',
+            '07' => 'Julio',      '08' => 'Agosto',
+            '09' => 'Septiembre', '10' => 'Octubre',
+            '11' => 'Noviembre',  '12' => 'Diciembre' );
+
+          $date = date("m/d/Y");
+
+          for($i=0; $i<2; $i++){
+            if($i === 0){
+              $dateformat = $date;
+              $time = strtotime($dateformat);
+              $date = date('m-d-Y-D', $time);
+            }else{
+              $month   = substr($date, 0, 2);
+              $day = substr($date, 3, 2);
+              $year  = substr($date, 6, 4);
+              $nday  = substr($date, 11, 3);
+              $dateformat = $days[$nday].' '.$day.' de '.$months[$month].', '.$year;
+            }                
+          }
+      ?>
+
+      <div class="current_date"> 
+        <p> <?php print ($dateformat);  ?> </p>
       </div>
 
     <?php endif; ?>
@@ -563,7 +605,7 @@
             foreach ($list['items'] as $t) {
               if($t->title != ""){
               ?>
-                <a href='http://libertasmorelos.lo/node/<?php echo $t->id ?>'>
+                <a href='<?php echo $url_site ?>/node/<?php echo $t->id ?>'>
                   <div class='lista_content <?php echo $t->title ?>'>
                     <div class='lista_content_image' style='background-image: url(<?php echo $t->image_url ?>);'> </div>
                     <div class='lista_content_info'>

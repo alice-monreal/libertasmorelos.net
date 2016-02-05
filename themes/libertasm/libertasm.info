@@ -25,6 +25,7 @@ stylesheets[all][] = plugins/jquery-ui-1.11.4.custom/jquery-ui.css
 
 scripts[] = plugins/slick-1.5.9/slick/slick.min.js
 scripts[] = plugins/jquery-ui-1.11.4.custom/jquery-ui.js
+scripts[] = plugins/A-jQuery-Plugin-To-Restrict-Characters-In-Text-Field-Alphanum/jquery.alphanum.js
 scripts[] = js/main.js
 scripts[] = js/my_module_ajax.js
 scripts[] = js/ajax_link.js

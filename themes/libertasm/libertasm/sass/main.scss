@@ -30,9 +30,19 @@
 
 #header{
 	display: block;
-	position: relative;
-	background-color: #fff !important;
+	/*position: fixed;*/
+    width: 100%;
+    /*height: 215px;*/
+    margin: 0;
+    top: 0;
+    background-color: #fff !important;
 	text-align: center;
+    overflow: hidden;
+    /*z-index: 9;*/
+}
+
+#header div.section{
+	overflow: hidden !important;
 }
 
 #name-and-slogan{
@@ -65,6 +75,18 @@
 	}
 }
 
+.current_date{
+    position: relative;
+    margin: 10px auto 5px;
+    width: 960px;
+    text-align: right;
+	p{
+    	margin: 0;
+		font-family: robotoCondesedRegular, Helvetica !important;
+	    font-size: 15px;
+	    color: #282828;
+	}
+}
 
 #nav-bar{
 	display: block;

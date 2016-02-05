@@ -73,10 +73,34 @@ jQuery( document ).ready(function( $ ) {
 	// });
 
   	console.debug('edit: ', $("#edit-field-date-und-0-value"));
+	
+
+	// Add articulo
 	$("#edit-field-date-und-0-value").datepicker({
 		inline: true
 	});
 
-	$("#edit-field-type-und-0-value, #edit-field-visited-und-0-value, #edit-field-approved-und-0-value, #edit-field-cancel-und-0-value").attr('disabled','disabled');
+	//#edit-field-type-und-0-value
+	$("#edit-field-visited-und-0-value, #edit-field-approved-und-0-value, #edit-field-cancel-und-0-value").attr('disabled','disabled');
+	$('#edit-title, #edit-field-description-und-0-value, #edit-field-title-und-0-value, #edit-field-title-und-0-value, #edit-field-atags-und-0-value, #edit-field-note-releated-1-und-0-value, #edit-field-note-releated-2-und-0-value, #edit-body-und-0-value').alphanum();
+
+	// Add opinión
+	$("#edit-field-opinion-date-und-0-value").datepicker({
+		inline: true
+	});
+	$('#edit-field-opinion-summary-und-0-value, #edit-field-opinion-author-und-0-value, #edit-field-opinion-tags-und-0-value').alphanum();
+
+	// Add efemeride
+	$("#edit-field-date-efem-und-0-value").datepicker({
+		inline: true
+	});
+	
+
+	// Hide facebook comment from /add/articulo
+	var url = window.location.href;
+	if(url.indexOf("add/articulo") != -1 || url.indexOf("add/opinion")){ 
+		// console.debug('facebook: ', $('#block-facebook-comments-block-fb-comments'));
+		$('#block-facebook-comments-block-fb-comments').css('display','none');
+	}
 
 });

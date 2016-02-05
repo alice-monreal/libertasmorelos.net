@@ -112,6 +112,7 @@ function opiniones_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
 
     // OPINIONES FIJAS
     $usuarios_fijos = array( 0 => 19, 1 => 20, 2 => 2 );
@@ -158,7 +159,7 @@ function opiniones_section_block_view($delta = '') {
       // SECCIÓN FIJA
       $section .= "
       <div class='opiniones_fix_container'>
-        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[0]->id."' class='opiniones_fix_link'>
+        <a href='".$url_site."/node/".$opiniones_fijas[0]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
             <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[0]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
@@ -167,7 +168,7 @@ function opiniones_section_block_view($delta = '') {
             </div>
           </div>
         </a>
-        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[1]->id."' class='opiniones_fix_link'>
+        <a href='".$url_site."/node/".$opiniones_fijas[1]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
             <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[1]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
@@ -176,7 +177,7 @@ function opiniones_section_block_view($delta = '') {
             </div>
           </div>
         </a>
-        <a href='http://libertasmorelos.lo/node/".$opiniones_fijas[2]->id."' class='opiniones_fix_link'>
+        <a href='".$url_site."/node/".$opiniones_fijas[2]->id."' class='opiniones_fix_link'>
           <div class='opiniones_fix_section'>
             <div class='opiniones_fix_image' style='background-image: url(".$opiniones_fijas[2]->image_url.");'> </div>
             <div class='opiniones_fix_info'>
@@ -199,7 +200,7 @@ function opiniones_section_block_view($delta = '') {
           $section .= "          
             <div class='opiniones_slide'>
               <div class='opiniones_wrapper'>
-                <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opn->id."'>
+                <a class='opiniones_link' href='".$url_site."/node/".$opn->id."'>
                   <div class='opiniones_content ".$opn->title."'>
                     <div class='opiniones_content_image' style='background-image: url(".$opn->image_url.");'> </div>
                     <div class='opiniones_content_info'>
@@ -212,7 +213,7 @@ function opiniones_section_block_view($delta = '') {
 
         }else{
           $section .= "
-                <a class='opiniones_link' href='http://libertasmorelos.lo/node/".$opn->nid."'>
+                <a class='opiniones_link' href='".$url_site."/node/".$opn->nid."'>
                   <div class='opiniones_content ".$opn->title."'>
                     <div class='opiniones_content_image' style='background-image: url(".$opn->image_url.");'> </div>
                     <div class='opiniones_content_info'>

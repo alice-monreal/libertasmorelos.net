@@ -21,6 +21,7 @@ function destacados_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
 
     $destacados = array();
     
@@ -115,7 +116,7 @@ function destacados_section_block_view($delta = '') {
       foreach ($destacados as $des) {
         // Link: Redirect to HOME if the article validation is empty.
         $section .= "
-          <a href='http://libertasmorelos.lo/node/".$des->id."'>
+          <a href='".$url_site."/node/".$des->id."'>
             <div class='destacados_content ".$des->title."'> 
               <p class='destacados_content_title'> ".$des->title." </p>
               <div class='destacados_content_image' style='background-image: url(".$des->image_url.");'> </div>

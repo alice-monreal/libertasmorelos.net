@@ -21,7 +21,7 @@ function footer_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
-      
+    
     $section = "
     <div class='footer_wrapper'>
       <div class='footer_container'>
@@ -29,9 +29,15 @@ function footer_section_block_view($delta = '') {
           <div class='footer_row'>
             <p class='footer_title'> Contacte con nosotros </p>
             <div class='footer_social_networks'>
-              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/FACEBOOK_F.png' />
-              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/TWITTER_F.png' />
-              <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/YOUTUBE_F.png' />
+              <a href='https://www.facebook.com/Libertas-Morelos-Peri%C3%B3dico-Digital-595683207250533/' target='_blank'>
+                <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/FACEBOOK_F.png' />
+              </a>
+              <a href='https://twitter.com/LibertasMor' target='_blank'>
+                <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/TWITTER_F.png' />
+              </a>
+              <a href='https://www.youtube.com/channel/UCPJQZub3tq4HzgoMnLGm-yw' target='_blank'>
+                <img class='footer_social_network' src='".$base_url."/themes/libertasm/images/YOUTUBE_F.png' />
+              </a>
             </div>
           </div>
           <div class='footer_row links'>

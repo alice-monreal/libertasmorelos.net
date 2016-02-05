@@ -21,6 +21,7 @@ function miscelaneas_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
 
     $miscelaneas = array();
     $miscelaneasTitles = array(0 => "ejecutivo", 1 => "legislativo", 2 => "judicial");
@@ -103,57 +104,6 @@ function miscelaneas_section_block_view($delta = '') {
       $miscelaneas[$i]->description = $description;
     }
 
-    // for($i = 0; $i < 2; $i++){
-    //   $item = $i+1;
-    //   $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_type_value FROM {node} A INNER JOIN {field_data_field_type} B ON A.nid = B.entity_id WHERE A.type = :type AND B.field_type_value = ".$item." ORDER BY nid DESC LIMIT 1";
-    //   $miscelanea = db_query($query, array(':type' => 'articulo'))->fetchAll();
-
-    //   if(!empty($miscelanea)){
-    //     $a_id = $miscelanea[0]->nid;
-
-    //     // Execute queries to get slide info: image, title (description).
-    //     if (is_numeric($a_id)){
-
-    //       // Get: Image.
-    //       $image = db_query("SELECT entity_id, revision_id, field_image_profile_fid FROM {field_data_field_image_profile} WHERE entity_id = :eid", array(':eid' => $a_id))->fetchObject();
-
-    //       $i_fid = $image->field_image_profile_fid;
-    //       if (is_numeric($i_fid)){
-    //         $image_profile_file = db_query("SELECT fid, uid, filename FROM {file_managed} WHERE fid = :fid", array(':fid' => $i_fid))->fetchObject();
-    //         $image_file = $image_profile_file->filename;
-    //       }
-    //       else{
-    //         $image_file = "gente.png"; //default image 
-    //       }
-
-    //       // Get: Title (description).
-    //       $query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, B.entity_id, B.field_title_value FROM {node} A INNER JOIN {field_data_field_title} B ON A.nid = B.entity_id WHERE B.entity_id = :e_id";
-
-    //       $title_field = db_query($query, array(':e_id' => $a_id))->fetchObject();
-    //       $title = $title_field->field_title_value;
-    //     }
-    //     else{
-    //       $image_file = "gente.png"; //default image 
-    //       $title = "No title"; //default title
-    //     }        
-    //   }
-    //   else{
-    //     $image_file = "gente.png";
-    //     $title = "No title";
-    //   }
-
-    //   $image_url = '"'.$base_url.'/sites/default/files/'.$image_file.'"';
-    //   $miscelanea[0]->image_name = $image_file;
-    //   $miscelanea[0]->image_url  = $image_url;
-
-    //   $miscelanea[0]->description = $title; 
-
-    //   $miscelanea[0]->title = $miscelaneasTitles[$i];
-
-    //   array_push($miscelaneas, $miscelanea);
-    // }
-
-
     // Get current path
     $path = current_path();
     if($path == "node/6"){
@@ -168,7 +118,7 @@ function miscelaneas_section_block_view($delta = '') {
       foreach ($miscelaneas as $miscelanea) {
         // Link: Redirect to HOME if the article validation is empty.
         $section .= "
-          <a href='http://libertasmorelos.lo/node/".$miscelanea->id."'>
+          <a href='".$url_site."/node/".$miscelanea->id."'>
             <div class='miscelaneas_content ".$miscelanea->title."'>
               <div class='miscelaneas_content_image' style='background-image: url(".$miscelanea->image_url.");'> </div>
               <div class='miscelaneas_content_info'>
@@ -182,7 +132,7 @@ function miscelaneas_section_block_view($delta = '') {
       }
 
       $section .= "
-          <a class='miscelaneas_content_see_more' href='http://libertasmorelos.lo/node/'> ver m&aacute;s... </a>
+          <a class='miscelaneas_content_see_more' href='".$url_site."/node/'> ver m&aacute;s... </a>
         </div>
       </div>";
 

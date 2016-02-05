@@ -21,6 +21,7 @@ function article_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
 
     // Query to get article nodes (TO DO: Last 5 nodes with cover validation: ifnot add other(s)*)
     $articles = db_query("SELECT nid, vid, uid, type, status FROM {node} WHERE type = :type ORDER BY nid DESC LIMIT 5", array(':type' => 'articulo'))->fetchAll();
@@ -90,7 +91,7 @@ function article_section_block_view($delta = '') {
 
         // Link: Redirect to HOME if the article validation is empty.
         $slider .= 
-        " <a href='http://libertasmorelos.lo/node/".$slide['id']."'>
+        " <a href='".$url_site."/node/".$slide['id']."'>
             <div class='deportes_slide'>
             	<div class='deportes_slide_background' style='background-image: url(".$url.")'>
                 <div class='deportes_slide_info'>

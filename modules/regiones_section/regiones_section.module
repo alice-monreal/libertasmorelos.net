@@ -21,6 +21,7 @@ function regiones_section_block_view($delta = '') {
   switch ($delta) {
     case 'articles':
     Global $base_url;
+    $url_site = "http://".$_SERVER['HTTP_HOST'];
 
     $rnames_query = "SELECT A.nid, A.vid, A.uid, A.type, A.status, A.title FROM {node} A 
       WHERE A.type = :type 
@@ -125,7 +126,7 @@ function regiones_section_block_view($delta = '') {
       foreach ($regiones as $region) {
         // Link: Redirect to HOME if the article validation is empty.
         $section .= "
-          <a href='http://libertasmorelos.lo/node/".$region[0]->nid."'>
+          <a href='".$url_site."/node/".$region[0]->nid."'>
             <div class='regiones_slide'>
               <div class='regiones_content ".$region[0]->title."'> 
                 <p class='regiones_content_title'> ".$region[0]->title." </p>
